@@ -1,0 +1,2 @@
+class Subjective < ApplicationRecord
+end

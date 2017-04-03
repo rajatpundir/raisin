@@ -1,0 +1,2 @@
+class Regular < ApplicationRecord
+end

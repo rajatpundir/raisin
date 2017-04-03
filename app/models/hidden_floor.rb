@@ -1,0 +1,2 @@
+class HiddenFloor < ApplicationRecord
+end
