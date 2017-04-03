@@ -1,0 +1,2 @@
+class HiddenFloorsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+module HiddenFloorsHelper
+end

@@ -1,0 +1,2 @@
+class SubjectivesController < ApplicationController
+end
