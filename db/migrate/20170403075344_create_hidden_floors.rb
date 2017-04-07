@@ -2,6 +2,9 @@ class CreateHiddenFloors < ActiveRecord::Migration[5.0]
 
   def change
     create_table :hidden_floors do |t|
+    	t.references :administrator
+    	t.references :moderator
+    	t.references :regular
 		t.timestamps
     end
   end

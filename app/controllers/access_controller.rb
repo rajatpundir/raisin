@@ -14,21 +14,45 @@ class AccessController < ApplicationController
 		if params[:towername].present? && params[:username].present? && params[:password].present?
 			found_tower = Tower.where(:towername => params[:towername]).first
 			if found_tower
-				found_user = AdminUser.where(:username => params[:username]).first
-				if found_user
+				if found_user = Regular.where(:username => params[:username]).first
 					authorized_user = found_user.authenticate(params[:password])
-				end
-				if authorized_user
-					session[:towername] = authorized_user.tower
-					session[:user_id] = authorized_user.id
-					session[:username] = authorized_user.username
-					redirect_to(managements_path)
+					if authorized_user
+						session[:towername] = authorized_user.tower
+						session[:user_id] = authorized_user.id
+						session[:username] = authorized_user.username
+						redirect_to(managements_path)
+					else
+						flash.now[:danger] = "Invalid username or password."
+						render('login')
+					end
+				elsif found_user = Moderator.where(:username => params[:username]).first
+					authorized_user = found_user.authenticate(params[:password])
+					if authorized_user
+						session[:towername] = authorized_user.tower
+						session[:user_id] = authorized_user.id
+						session[:username] = authorized_user.username
+						redirect_to(managements_path)
+					else
+						flash.now[:danger] = "Invalid username or password."
+						render('login')
+					end
+				elsif found_user = Administrator.where(:username => params[:username]).first
+					authorized_user = found_user.authenticate(params[:password])
+					if authorized_user
+						session[:towername] = authorized_user.tower
+						session[:user_id] = authorized_user.id
+						session[:username] = authorized_user.username
+						redirect_to(managements_path)
+					else
+						flash.now[:danger] = "Invalid username or password."
+						render('login')
+					end
 				else
 					flash.now[:danger] = "Invalid username or password."
 					render('login')
 				end
 			else
-				flash.now[:danger] = "Invalid Tower name"
+				flash.now[:danger] = "Invalid towername."
 				render('login')
 			end
 		end

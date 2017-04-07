@@ -10,94 +10,161 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403082749) do
+ActiveRecord::Schema.define(version: 20170403083438) do
 
   create_table "administrators", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "username",        null: false
+    t.integer  "tower_id"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["tower_id"], name: "index_administrators_on_tower_id"
   end
 
   create_table "answers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "subjective_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["subjective_id"], name: "index_answers_on_subjective_id"
   end
 
   create_table "choices", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "objective_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["objective_id"], name: "index_choices_on_objective_id"
   end
 
   create_table "configurations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_configurations_on_question_id"
   end
 
   create_table "floors", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "contains"
+    t.integer  "administrator_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["administrator_id"], name: "index_floors_on_administrator_id"
   end
 
   create_table "forums", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "floor_id"
+    t.integer  "hidden_floor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["floor_id"], name: "index_forums_on_floor_id"
+    t.index ["hidden_floor_id"], name: "index_forums_on_hidden_floor_id"
   end
 
   create_table "hidden_floors", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "administrator_id"
+    t.integer  "moderator_id"
+    t.integer  "regular_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["administrator_id"], name: "index_hidden_floors_on_administrator_id"
+    t.index ["moderator_id"], name: "index_hidden_floors_on_moderator_id"
+    t.index ["regular_id"], name: "index_hidden_floors_on_regular_id"
   end
 
   create_table "moderators", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "username",         null: false
+    t.text     "first_name"
+    t.text     "last_name"
+    t.integer  "administrator_id"
+    t.string   "password_digest"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["administrator_id"], name: "index_moderators_on_administrator_id"
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "floor_id"
+    t.integer  "hidden_floor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["floor_id"], name: "index_notifications_on_floor_id"
+    t.index ["hidden_floor_id"], name: "index_notifications_on_hidden_floor_id"
   end
 
   create_table "objectives", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_objectives_on_question_id"
   end
 
   create_table "polls", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "floor_id"
+    t.integer  "hidden_floor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["floor_id"], name: "index_polls_on_floor_id"
+    t.index ["hidden_floor_id"], name: "index_polls_on_hidden_floor_id"
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer  "thread_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["thread_id"], name: "index_posts_on_thread_id"
   end
 
   create_table "questions", force: :cascade do |t|
+    t.integer  "test_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
   create_table "regulars", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "username",        null: false
+    t.text     "first_name"
+    t.text     "last_name"
+    t.integer  "floor_id"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["floor_id"], name: "index_regulars_on_floor_id"
   end
 
   create_table "subjectives", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_subjectives_on_question_id"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "floor_id"
+    t.integer  "hidden_floor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["floor_id"], name: "index_tags_on_floor_id"
+    t.index ["hidden_floor_id"], name: "index_tags_on_hidden_floor_id"
   end
 
   create_table "tests", force: :cascade do |t|
+    t.integer  "floor_id"
+    t.integer  "hidden_floor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["floor_id"], name: "index_tests_on_floor_id"
+    t.index ["hidden_floor_id"], name: "index_tests_on_hidden_floor_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.integer  "forum_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["forum_id"], name: "index_topics_on_forum_id"
   end
 
   create_table "towers", force: :cascade do |t|
+    t.text     "towername",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

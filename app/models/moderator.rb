@@ -8,4 +8,6 @@ class Moderator < ApplicationRecord
 	has_many :notifications, :dependent => :destroy
 	has_many :tags, :dependent => :destroy
 
+	has_secure_password
+
 end

@@ -5,4 +5,6 @@ class Administrator < ApplicationRecord
 	has_many :floors, :dependent => :destroy
 	has_many :hidden_floors, :dependent => :destroy
 
+	has_secure_password
+
 end
