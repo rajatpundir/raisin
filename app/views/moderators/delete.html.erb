@@ -1,0 +1,12 @@
+<% @page_title = "Delete Moderator"%>
+<%= form_for(@moderator,:method => 'delete') do |f| %>
+<div class="center page-header">
+  <h2><%= f.object.username %>?</h2>
+</div>
+    <div class="center form-group">
+      <p>Are you sure you wish to permanently delete this?</p>
+      <div class="col-sm-12">
+        <%= f.submit "Delete Moderator",class: 'btn btn-danger btn-lg' %>
+      </div>
+    </div>
+<% end %>

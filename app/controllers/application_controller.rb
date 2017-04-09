@@ -8,5 +8,23 @@ class ApplicationController < ActionController::Base
 			redirect_to(access_login_path)
 		end
 	end
+
+	def is_administrator
+		unless session[:usertype] == "admin"
+			redirect_to(access_logout_path)
+		end
+	end
+
+	def is_moderator
+		unless session[:usertype] == "moderator"
+			redirect_to(access_logout_path)
+		end
+	end
 	
+	def is_not_regular
+		if session[:usertype] == "regular"
+			redirect_to(access_logout_path)
+		end
+	end
+
 end

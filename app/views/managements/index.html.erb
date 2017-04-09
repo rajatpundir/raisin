@@ -1,1 +1,59 @@
-aiysdgiuk
+<% @page_title = "Tower Management" %>
+<div class="center page-header">
+  <h2>Tower Management</h2>
+  <% if session[:usertype] == "admin" %>
+  <%= link_to "Add new Moderator", new_moderator_path, :class => 'btn btn-primary' %>
+  <% end %>
+  <%= link_to "Add new Floor", new_floor_path, :class => 'btn btn-primary' %>
+  <%= link_to "Add new Hidden Floor", new_hidden_floor_path, :class => 'btn btn-primary' %>
+</div>
+<% if session[:usertype] == "admin" %>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @moderators.each do |moderator| %>
+        <tr>
+          <td>Moderator ID: <%= moderator.id %></td>
+          <td>
+            <div >
+            <%= link_to("Show", moderator_path(moderator), :class => 'btn btn-info') %>
+            <%= link_to("Edit", edit_moderator_path(moderator), :class => 'btn btn-info') %>
+            <%= link_to("Delete", delete_moderator_path(moderator), :class => 'btn btn-danger') %>
+            </div>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+<% end %>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @floors.each do |floor| %>
+        <tr>
+          <td>Floor ID: <%= floor.id %></td>
+          <td>
+            <div >
+            <%= link_to("Show", floor_path(floor), :class => 'btn btn-info') %>
+            <%= link_to("Edit", edit_floor_path(floor), :class => 'btn btn-info') %>
+            <%= link_to("Delete", delete_floor_path(floor), :class => 'btn btn-danger') %>
+            </div>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @hidden_floors.each do |hidden_floor| %>
+        <tr>
+          <td>Hidden Floor ID: <%= hidden_floor.id %></td>
+          <td>
+            <div >
+            <%= link_to("Show", hidden_floor_path(hidden_floor), :class => 'btn btn-info') %>
+            <%= link_to("Edit", edit_hidden_floor_path(hidden_floor), :class => 'btn btn-info') %>
+            <%= link_to("Delete", delete_hidden_floor_path(hidden_floor), :class => 'btn btn-danger') %>
+            </div>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

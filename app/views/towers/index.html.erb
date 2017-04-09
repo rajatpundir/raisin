@@ -1,0 +1,21 @@
+<% @page_title = "Index of Towers" %>
+<div class="center page-header">
+  <h2>Index of Towers</h2>
+  <%= link_to "Add new Tower", new_tower_path, :class => 'btn btn-primary' %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @towers.each do |tower| %>
+        <tr>
+          <td>Tower ID: <%= tower.id %></td>
+          <td>
+            <div >
+            <%= link_to("Show", tower_path(tower), :class => 'btn btn-info') %>
+            <%= link_to("Edit", edit_tower_path(tower), :class => 'btn btn-info') %>
+            <%= link_to("Delete", delete_tower_path(tower), :class => 'btn btn-danger') %>
+            </div>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

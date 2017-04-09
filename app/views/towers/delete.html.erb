@@ -1,0 +1,15 @@
+<% @page_title = "Delete Tower"%>
+<%= form_for(@tower,:method => 'delete') do |f| %>
+<div class="center page-header">
+  <h2><%= f.object.towername %>?</h2>
+</div>
+    <div class="center form-group">
+      <p>Are you sure you wish to permanently delete this?</p>
+      <div class="col-sm-12">
+        <%= f.submit "Delete Tower",class: 'btn btn-danger btn-lg' %>
+      </div>
+    </div>
+<% end %>
+
+
+

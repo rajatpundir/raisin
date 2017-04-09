@@ -1,5 +1,13 @@
 class Tower < ApplicationRecord
 
-	has_one :administrator, :dependent => :destroy
+	has_many :moderators, :dependent => :destroy
+	has_many :floors, :dependent => :destroy
+	has_many :hidden_floors, :dependent => :destroy
+
+	has_secure_password
+
+	validates_presence_of :towername, :password
+
+	validates_uniqueness_of :towername
 
 end
