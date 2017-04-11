@@ -8,6 +8,7 @@ class AccessController < ApplicationController
 	end
 
 	def login
+		# reders login template
 	end
 
 	def attempt_login
@@ -17,7 +18,7 @@ class AccessController < ApplicationController
 				if params[:username] == "admin"
 					authorized_user = found_tower.authenticate(params[:password])
 					if authorized_user
-						session[:towername] = authorized_user.towername
+						session[:tower_id] = authorized_user.id
 						session[:user_id] = authorized_user.id
 						session[:username] = "admin"
 						session[:usertype] = "admin"
@@ -29,11 +30,16 @@ class AccessController < ApplicationController
 				elsif  found_user = Regular.where(:username => params[:username]).first
 					authorized_user = found_user.authenticate(params[:password])
 					if authorized_user
-						session[:towername] = authorized_user.tower
-						session[:user_id] = authorized_user.id
-						session[:username] = authorized_user.username
-						session[:usertype] = "regular"
-						redirect_to(managements_path)
+						if(authorized_user.floor.tower.towername == params[:towername])
+							session[:tower_id] = authorized_user.floor.tower.id
+							session[:user_id] = authorized_user.id
+							session[:username] = authorized_user.username
+							session[:usertype] = "regular"
+							redirect_to(managements_path)
+						else
+							flash.now[:danger] = "Invalid username or password."
+						render('login')
+						end
 					else
 						flash.now[:danger] = "Invalid username or password."
 						render('login')
@@ -41,11 +47,16 @@ class AccessController < ApplicationController
 				elsif found_user = Moderator.where(:username => params[:username]).first
 					authorized_user = found_user.authenticate(params[:password])
 					if authorized_user
-						session[:towername] = authorized_user.tower
-						session[:user_id] = authorized_user.id
-						session[:username] = authorized_user.username
-						session[:usertype] = "moderator"
-						redirect_to(managements_path)
+						if(authorized_user.tower.towername == params[:towername])
+							session[:tower_id] = authorized_user.tower.id
+							session[:user_id] = authorized_user.id
+							session[:username] = authorized_user.username
+							session[:usertype] = "moderator"
+							redirect_to(managements_path)
+						else
+							flash.now[:danger] = "Invalid username or password."
+							render('login')
+						end
 					else
 						flash.now[:danger] = "Invalid username or password."
 						render('login')
@@ -62,7 +73,7 @@ class AccessController < ApplicationController
 	end
 
 	def logout
-		session[:towername] = nil
+		session[:tower_id] = nil
 		session[:user_id] = nil
 		session[:username] = nil
 		session[:usertype] = nil

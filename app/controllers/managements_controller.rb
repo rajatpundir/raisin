@@ -4,7 +4,7 @@ class ManagementsController < ApplicationController
 	before_action :is_not_regular
 
 	def index
-		@tower = Tower.find(session[:user_id])
+		@tower = Tower.find(session[:tower_id])
 		@moderators = @tower.moderators
 		@floors = @tower.floors
 		@hidden_floors = @tower.hidden_floors

@@ -1,0 +1,21 @@
+<% @page_title = "Manage Floors" %>
+<div class="center page-header">
+  <h2>Manage Floors</h2>
+  <%= link_to "Add new Floor", new_floor_path, :class => 'btn btn-primary' %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @floors.each do |floor| %>
+        <tr>
+          <td>Floor ID: <%= floor.id %></td>
+          <td>
+            <div >
+            <%= link_to("Show", floor_path(floor), :class => 'btn btn-info') %>
+            <%= link_to("Edit", edit_floor_path(floor), :class => 'btn btn-info') %>
+            <%= link_to("Delete", delete_floor_path(floor), :class => 'btn btn-danger') %>
+            </div>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

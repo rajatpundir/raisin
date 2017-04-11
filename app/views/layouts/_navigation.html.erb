@@ -7,22 +7,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Compilest", '#' , class: "navbar-brand", id: "logo" %>
+      <%= link_to "Raisin", '#' , class: "navbar-brand", id: "logo" %>
     </div>
-    <% if is_logged_in %>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <% if user.superuser? %>
-              <ul class="nav navbar-nav">
-                <li><%= link_to "Manage Users", admin_users_path %></li>
-                <li><%= link_to "Manage Questions", questions_path %></li>
-              </ul>
-          <% end %>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to user.name, '' %></li>
-            <li><%= link_to "Logout", access_logout_path %></li>
-          </ul>
-        </div>
-    <% end %>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Manage", managements_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Logout", access_logout_path %></li>
+      </ul>
+    </div>
   </div>
 </nav>
 

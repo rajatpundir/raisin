@@ -1,0 +1,24 @@
+<div class="center page-header">
+  <h2><%= @floor.floorname %></h2>
+  <%= form_for(@floor, :url=> new_regular_path, :method => 'get' ) do |f| %>
+  <%= hidden_field_tag :floor_id, @floor.id %>
+  <%= f.submit "Create Regular", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @regulars.each do |regular| %>
+    <tr>
+      <td>Regular ID: <%= regular.id %></td>
+      <td>
+        <div>
+          <%= link_to("Show", regular_path(regular), :class => 'btn btn-info') %>
+          <%= link_to("Edit", edit_regular_path(regular), :class => 'btn btn-info') %>
+          <%= link_to("Delete", delete_regular_path(regular), :class => 'btn btn-danger') %>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+

@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20170403083438) do
   end
 
   create_table "floors", force: :cascade do |t|
+    t.string   "floorname"
     t.integer  "tower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,9 +60,9 @@ ActiveRecord::Schema.define(version: 20170403083438) do
   end
 
   create_table "moderators", force: :cascade do |t|
-    t.text     "username",        null: false
-    t.text     "first_name"
-    t.text     "last_name"
+    t.string   "username",        null: false
+    t.string   "first_name"
+    t.string   "last_name"
     t.integer  "tower_id"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
@@ -70,7 +71,7 @@ ActiveRecord::Schema.define(version: 20170403083438) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.text     "message"
+    t.string   "message"
     t.integer  "floor_id"
     t.integer  "hidden_floor_id"
     t.datetime "created_at",      null: false
@@ -110,9 +111,9 @@ ActiveRecord::Schema.define(version: 20170403083438) do
   end
 
   create_table "regulars", force: :cascade do |t|
-    t.text     "username",        null: false
-    t.text     "first_name"
-    t.text     "last_name"
+    t.string   "username",        null: false
+    t.string   "first_name"
+    t.string   "last_name"
     t.integer  "floor_id"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
@@ -154,7 +155,7 @@ ActiveRecord::Schema.define(version: 20170403083438) do
   end
 
   create_table "towers", force: :cascade do |t|
-    t.text     "towername",       null: false
+    t.string   "towername",       null: false
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false

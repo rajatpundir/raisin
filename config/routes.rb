@@ -31,6 +31,12 @@ Rails.application.routes.draw do
 		end
 	end
 
+	resources :regulars do
+		member do
+			get :delete
+		end
+	end
+
 	resources :managements do
 		member do
 			get :delete

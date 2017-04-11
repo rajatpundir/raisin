@@ -1,8 +1,8 @@
-<% @page_title = "Edit Moderator"%>
+<% @page_title = "Edit Regular"%>
 <div class="center page-header">
-	<h2>Edit Moderator</h2>
+	<h2>Edit Regular</h2>
 </div>
-<%= form_for(@moderator,:url=> moderator_path(@moderator),:method => 'patch', :html => {:class => 'form-horizontal', :role => 'form'}) do |f| %>
+<%= form_for(@regular,:url=> regular_path(@regular),:method => 'patch', :html => {:class => 'form-horizontal', :role => 'form'}) do |f| %>
 <div class="form-group">
 	<%= f.label :first_name, class: 'col-sm-2 control-label' %>
 	<div class="col-sm-8">

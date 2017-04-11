@@ -8,4 +8,6 @@ class Floor < ApplicationRecord
 	has_many :tags, :dependent => :destroy
 	has_many :notifications, :dependent => :destroy
 
+	validates_presence_of :floorname
+
 end
