@@ -1,0 +1,13 @@
+<% @page_title = "Delete Tag"%>
+<%= form_for(@tag,:method => 'delete') do |f| %>
+<%= hidden_field_tag :floor_id, @floor_id %>
+<div class="center page-header">
+  <h2><%= f.object.title %>?</h2>
+</div>
+    <div class="center form-group">
+      <p>Are you sure you wish to permanently delete this?</p>
+      <div class="col-sm-12">
+        <%= f.submit "Delete Tag",class: 'btn btn-danger btn-lg' %>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,29 @@
+<% @page_title = "Manage Tags" %>
+<div class="center page-header">
+  <h2>Manage Tags</h2>
+  <%= form_for(@floor, :url=> new_tag_path, :method => 'get' ) do |f| %>
+  <%= hidden_field_tag :floor_id, @floor.id %>
+  <%= f.submit "Add new Tag", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @tags.each do |tag| %>
+    <tr>
+      <td>Tag ID: <%= tag.id %></td>
+      <td>
+        <div >
+          <%= link_to("Show", tag_path(tag), :class => 'btn btn-info') %>
+          <%= form_for(@floor, :url=> edit_tag_path(tag), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :floor_id, @floor.id %>
+          <%= f.submit "Edit", class: 'btn btn-info' %>
+          <% end %>
+          <%= form_for(@floor, :url=> delete_tag_path(tag), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :floor_id, @floor.id %>
+          <%= f.submit "Delete", class: 'btn btn-danger' %>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

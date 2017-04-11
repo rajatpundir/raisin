@@ -8,6 +8,10 @@
   <%= hidden_field_tag :floor_id, @floor.id %>
   <%= f.submit "Manage Notifications", class: 'btn btn-primary' %>
   <% end %>
+  <%= form_for(@floor, :url=> tags_path, :method => 'get' ) do |f| %>
+  <%= hidden_field_tag :floor_id, @floor.id %>
+  <%= f.submit "Manage Tags", class: 'btn btn-primary' %>
+  <% end %>
 </div>
 <div class="col-xs-8 col-xs-offset-2 well well-lg">
   <table class="table table-bordered table-striped table-hover table-condensed">

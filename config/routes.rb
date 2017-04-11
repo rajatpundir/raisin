@@ -49,4 +49,10 @@ Rails.application.routes.draw do
 		end
 	end
 
+	resources :tags do
+		member do
+			get :delete
+		end
+	end
+
 end
