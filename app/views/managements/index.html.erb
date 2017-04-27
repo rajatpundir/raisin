@@ -1,11 +1,11 @@
 <% @page_title = "Tower Management" %>
 <div class="center page-header">
-  <h2>Tower Management</h2>
+  <h1><%= @tower.towername %></h1>
   <% if session[:usertype] == "admin" %>
   <%= link_to "Add new Moderator", new_moderator_path, :class => 'btn btn-primary' %>
   <%= link_to "Add new Floor", new_floor_path, :class => 'btn btn-primary' %>
   <% end %>
-  <%= link_to "Add new Hidden Floor", new_hidden_floor_path, :class => 'btn btn-primary' %>
+  <% link_to "Add new Hidden Floor", new_hidden_floor_path, :class => 'btn btn-primary' %>
 </div>
 <% if session[:usertype] == "admin" %>
 <div class="col-xs-8 col-xs-offset-2 well well-lg">
@@ -15,7 +15,7 @@
       <td>Moderator ID: <%= moderator.id %></td>
       <td>
         <div>
-          <%= link_to("Show", moderator_path(moderator), :class => 'btn btn-info') %>
+          <%= link_to("Manage", moderator_path(moderator), :class => 'btn btn-info') %>
           <%= link_to("Edit", edit_moderator_path(moderator), :class => 'btn btn-info') %>
           <%= link_to("Delete", delete_moderator_path(moderator), :class => 'btn btn-danger') %>
         </div>
@@ -31,7 +31,7 @@
       <td>Floor ID: <%= floor.id %></td>
       <td>
         <div>
-          <%= link_to("Show", floor_path(floor), :class => 'btn btn-info') %>
+          <%= link_to("Manage", floor_path(floor), :class => 'btn btn-info') %>
           <%= link_to("Edit", edit_floor_path(floor), :class => 'btn btn-info') %>
           <%= link_to("Delete", delete_floor_path(floor), :class => 'btn btn-danger') %>
         </div>

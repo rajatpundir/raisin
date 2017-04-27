@@ -43,6 +43,12 @@ Rails.application.routes.draw do
 		end
 	end
 
+	resources :home do
+		member do
+			get :delete
+		end
+	end
+
 	resources :notifications do
 		member do
 			get :delete

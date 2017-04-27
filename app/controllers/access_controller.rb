@@ -32,10 +32,11 @@ class AccessController < ApplicationController
 					if authorized_user
 						if(authorized_user.floor.tower.towername == params[:towername])
 							session[:tower_id] = authorized_user.floor.tower.id
+							session[:floor_id] = authorized_user.floor.id
 							session[:user_id] = authorized_user.id
 							session[:username] = authorized_user.username
 							session[:usertype] = "regular"
-							redirect_to(managements_path)
+							redirect_to(home_index_path)
 						else
 							flash.now[:danger] = "Invalid username or password."
 						render('login')
