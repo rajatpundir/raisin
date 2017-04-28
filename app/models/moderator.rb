@@ -1,7 +1,6 @@
 class Moderator < ApplicationRecord
 
 	belongs_to :tower
-	has_many :hidden_floors, :dependent => :destroy
 
 	has_secure_password
 

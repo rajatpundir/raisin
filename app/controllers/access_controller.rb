@@ -36,7 +36,7 @@ class AccessController < ApplicationController
 							session[:user_id] = authorized_user.id
 							session[:username] = authorized_user.username
 							session[:usertype] = "regular"
-							redirect_to(home_index_path)
+							redirect_to(home_home_notification_path)
 						else
 							flash.now[:danger] = "Invalid username or password."
 						render('login')

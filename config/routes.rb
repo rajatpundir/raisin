@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 	get 'access/login'
 	post 'access/attempt_login'
 	get 'access/logout'
+	get 'home/home_notification'
+	get 'home/home_tag'
 
 	resources :towers do
 		member do
@@ -43,12 +45,6 @@ Rails.application.routes.draw do
 		end
 	end
 
-	resources :home do
-		member do
-			get :delete
-		end
-	end
-
 	resources :notifications do
 		member do
 			get :delete
@@ -56,6 +52,18 @@ Rails.application.routes.draw do
 	end
 
 	resources :tags do
+		member do
+			get :delete
+		end
+	end
+
+	resources :forums do
+		member do
+			get :delete
+		end
+	end
+
+	resources :topics do
 		member do
 			get :delete
 		end

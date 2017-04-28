@@ -7,7 +7,6 @@ class ManagementsController < ApplicationController
 		@tower = Tower.find(session[:tower_id])
 		@moderators = @tower.moderators
 		@floors = @tower.floors
-		@hidden_floors = @tower.hidden_floors
 	end
 
 end

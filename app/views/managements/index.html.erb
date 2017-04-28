@@ -1,11 +1,8 @@
 <% @page_title = "Tower Management" %>
 <div class="center page-header">
   <h1><%= @tower.towername %></h1>
-  <% if session[:usertype] == "admin" %>
   <%= link_to "Add new Moderator", new_moderator_path, :class => 'btn btn-primary' %>
   <%= link_to "Add new Floor", new_floor_path, :class => 'btn btn-primary' %>
-  <% end %>
-  <% link_to "Add new Hidden Floor", new_hidden_floor_path, :class => 'btn btn-primary' %>
 </div>
 <% if session[:usertype] == "admin" %>
 <div class="col-xs-8 col-xs-offset-2 well well-lg">
@@ -41,19 +38,3 @@
   </table>
 </div>
 <% end %>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @hidden_floors.each do |hidden_floor| %>
-    <tr>
-      <td>Hidden Floor ID: <%= hidden_floor.id %></td>
-      <td>
-        <div>
-          <%= link_to("Show", hidden_floor_path(hidden_floor), :class => 'btn btn-info') %>
-          <%= link_to("Edit", edit_hidden_floor_path(hidden_floor), :class => 'btn btn-info') %>
-          <%= link_to("Delete", delete_hidden_floor_path(hidden_floor), :class => 'btn btn-danger') %>
-        </div>
-      </td>
-    </tr>
-    <% end %>
-  </table>
-</div>

@@ -1,0 +1,15 @@
+<% @page_title = "Tower Management" %>
+<div class="center page-header">
+  <h1><%= @floor.floorname %></h1>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @notifications.each do |notification| %>
+    <tr>
+      <td>
+        <%= link_to(notification.title, notification_path(notification), :class => '') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

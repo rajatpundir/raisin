@@ -1,0 +1,29 @@
+<% @page_title = "Manage topics" %>
+<div class="center page-header">
+  <h2>Forum</h2>
+  <%= form_for(@floor, :url=> new_topic_path, :method => 'get' ) do |f| %>
+  <%= hidden_field_tag :floor_id, @floor.id %>
+  <%= f.submit "Add new Topic", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @topics.each do |topic| %>
+    <tr>
+      <td><%= topic.title %></td>
+      <td>
+        <div >
+          <%= link_to("Show", topic_path(topic), :class => 'btn btn-info') %>
+          <%= form_for(@floor, :url=> edit_topic_path(topic), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :floor_id, @floor.id %>
+          <%= f.submit "Edit", class: 'btn btn-info' %>
+          <% end %>
+          <%= form_for(@floor, :url=> delete_topic_path(topic), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :floor_id, @floor.id %>
+          <%= f.submit "Delete", class: 'btn btn-danger' %>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
