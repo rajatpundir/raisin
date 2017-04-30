@@ -1,9 +1,9 @@
-<% @page_title = "Edit Notification"%>
+<% @page_title = "Edit Topic"%>
 <div class="center page-header">
-	<h2>Edit Notification</h2>
+	<h2>Edit Topic</h2>
 </div>
-<%= form_for(@notification,:url=> notification_path(@notification),:method => 'patch', :html => {:class => 'form-horizontal', :role => 'form'}) do |f| %>
-<%= hidden_field_tag :floor_id, @floor_id %>
+<%= form_for(@topic,:url=> topic_path(@topic),:method => 'patch', :html => {:class => 'form-horizontal', :role => 'form'}) do |f| %>
+<%= hidden_field_tag :forum_id, @forum_id %>
 <div class="form-group">
   <%= f.label :title, class: 'col-sm-2 control-label' %>
   <div class="col-sm-8">
@@ -11,14 +11,8 @@
   </div>
 </div>
 <div class="form-group">
-	<%= f.label :message, class: 'col-sm-2 control-label' %>
-	<div class="col-sm-8">
-		<%= f.text_area :message,  rows: '10', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
-	</div>
-</div>
-<div class="form-group">
 	<div class="col-sm-offset-2 col-sm-10">
-		<%= f.submit "Update",class: 'btn btn-primary btn-lg' %>
+		<%= f.submit "Update Topic", class: 'btn btn-primary btn-lg' %>
 	</div>
 </div>
 <% end %>

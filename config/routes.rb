@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 	get 'access/logout'
 	get 'home/home_notification'
 	get 'home/home_tag'
+	post 'topics/add_post'
 
 	resources :towers do
 		member do
