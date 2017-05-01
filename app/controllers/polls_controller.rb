@@ -13,6 +13,23 @@ class PollsController < ApplicationController
 		@poll = Poll.find(params[:id])
 	end
 
+	def add_option
+		@option = Option.new(:message => params[:option][:message], :poll_id => params[:poll_id])
+		if @option.save
+			redirect_to edit_poll_path(params[:poll_id])
+		else
+			flash[:danger].now = "Option couldn't be created."
+			render 'new'
+		end
+	end
+
+	def delete_option
+		@option = Option.find(params[:format])
+		@option.destroy
+		flash[:success] = "Option deleted successfully."
+		redirect_to edit_poll_path(@option.poll)
+	end
+
 	# CREATE ACTIONS
 	def new
 		@poll = Poll.new
@@ -33,6 +50,7 @@ class PollsController < ApplicationController
 	# UPDATE ACTIONS
 	def edit
 		@poll = Poll.find(params[:id])
+		@option = Option.new
 		@floor_id = session[:floor_id]
 	end
 

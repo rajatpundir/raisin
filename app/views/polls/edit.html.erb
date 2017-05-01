@@ -20,5 +20,34 @@
 		<%= f.submit "Update",class: 'btn btn-primary btn-lg' %>
 	</div>
 </div>
+<!-- <div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		
+	</div>
+</div> -->
 <% end %>
-
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+      <td>
+        <%= form_for(@option, :url=>  polls_add_option_path(@poll), :method => 'post', :html => {:class => 'form-horizontal', :role => 'form'} ) do |f| %>
+			<%= hidden_field_tag :poll_id, @poll.id %>
+			<div class="form-group">
+			  <%= f.submit "Add Option", class: 'btn btn-danger' %>
+			  <div class="col-sm-8">
+			    <%= f.text_area :message,  rows: '1', class: 'form-control', placeholder: 'Add option...', autofocus: true %>
+			  </div>
+			</div>
+		<% end %>
+      </td>
+    </tr>
+    <% @poll.options.each do |option| %>
+    <tr>
+      <td>
+        <%= simple_format(option.message) %>
+      </td>
+      <td> <%= link_to("Delete", polls_delete_option_path(option), :class => 'btn btn-info') %> </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

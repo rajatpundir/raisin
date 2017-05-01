@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 	get 'home/home_notification'
 	get 'home/home_tag'
 	post 'topics/add_post'
+	post 'polls/add_option'
+	get 'polls/delete_option'
 
 	resources :towers do
 		member do
