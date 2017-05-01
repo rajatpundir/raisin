@@ -3,11 +3,10 @@ class TopicsController < ApplicationController
 	before_action :confirm_logged_in
 
 	#READ ACTIONS
-	# def index
-	# 	@floor = Floor.find(session[:floor_id])
-	# 	@forum = @floor.forum
-	# 	@topics = @forum.topics
-	# end
+	def index
+		@floor = Floor.find(session[:floor_id])
+		@topics = @floor.topics
+	end
 
 	def show
 		@topic = Topic.find(params[:id])
@@ -18,7 +17,6 @@ class TopicsController < ApplicationController
 	def add_post
 		@post = Post.new(:message => params[:post][:message], :topic_id => params[:topic_id])
 		if @post.save
-			flash[:success] = "Post added successfully."
 			redirect_to topic_path(params[:topic_id])
 		else
 			flash[:danger].now = "Post couldn't be created."
@@ -28,16 +26,15 @@ class TopicsController < ApplicationController
 
 	# CREATE ACTIONS
 	def new
-		@floor = Floor.find(session[:floor_id])
+		@floor_id = session[:floor_id]
 		@topic = Topic.new
-		@forum_id = @floor.forum.id
 	end
 
 	def create
-		@topic = Topic.new(:title => params[:topic][:title], :forum_id => params[:forum_id])
+		@topic = Topic.new(:title => params[:topic][:title], :message => params[:topic][:message], :floor_id => session[:floor_id])
 		if @topic.save
 			flash[:success] = "Topic created successfully."
-			redirect_to forums_path(forum_id: @topic.forum)
+			redirect_to topics_path(floor_id: @topic.floor)
 		else
 			flash[:danger].now = "Topic couldn't be created."
 			render 'new'
@@ -47,13 +44,13 @@ class TopicsController < ApplicationController
 	# UPDATE ACTIONS
 	def edit
 		@topic = Topic.find(params[:id])
-		@forum_id = @topic.forum.id
+		@floor_id = @topic.floor.id
 	end
 
 	def update
 		@topic = Topic.find(params[:id])
 		if @topic.update_attributes(topic_params)
-			redirect_to forums_path(forum_id: params[:forum_id])
+			redirect_to topics_path(floor_id: @topic.floor)
 		else
 			render 'edit'
 		end
@@ -68,13 +65,13 @@ class TopicsController < ApplicationController
 		@topic = Topic.find(params[:id])
 		@topic.destroy
 		flash[:success] = "Topic '#{@topic.title}' deleted successfully."
-		redirect_to forums_path(forum_id: params[:forum_id])
+		redirect_to topics_path(floor_id: @topic.floor)
 	end
 
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title)
+		params.require(:topic).permit(:title, :message)
 	end
 
 end

@@ -11,12 +11,15 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Manage", managements_path %></li>
-        <li><%= link_to "Notifications", home_home_notification_path %></li>
-        <li><%= link_to "Tags", home_home_tag_path %></li>
-        <li><%= link_to "Polls", forums_path %></li>
-        <li><%= link_to "Tests", forums_path %></li>
-        <li><%= link_to "Forum", forums_path %></li>
+        <% if session[:usertype] == "regular" %>
+          <li><%= link_to "Notifications", home_home_notification_path %></li>
+          <li><%= link_to "Tags", home_home_tag_path %></li>
+          <li><%= link_to "Tests", '#' %></li>
+          <li><%= link_to "Polls", polls_path %></li>
+          <li><%= link_to "Forum", topics_path %></li>
+        <% else %>
+          <li><%= link_to "Manage", managements_path %></li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Logout", access_logout_path %></li>

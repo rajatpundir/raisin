@@ -1,6 +1,6 @@
 <% @page_title = @topic.title %>
 <div class="center page-header">
-  <h2><%= @topic.title %></h2>
+  <h3><%= simple_format(@topic.message) %></h3>
 </div>
 <div class="col-xs-8 col-xs-offset-2 well well-lg">
   <table class="table table-bordered table-striped table-hover table-condensed">
@@ -9,12 +9,11 @@
         <%= form_for(@post, :url=>  topics_add_post_path(@topic), :method => 'post', :html => {:class => 'form-horizontal', :role => 'form'} ) do |f| %>
         <%= hidden_field_tag :topic_id, @topic.id %>
         <div class="form-group">
-          <%= f.label :message, class: 'col-sm-2 control-label' %>
+          <%= f.submit "Post", class: 'btn btn-danger' %>
           <div class="col-sm-8">
-            <%= f.text_area :message,  rows: '4', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
+            <%= f.text_area :message,  rows: '1', class: 'form-control', placeholder: 'Say something...', autofocus: true %>
           </div>
         </div>
-        <%= f.submit "Post", class: 'btn btn-danger' %>
         <% end %>
       </td>
     </tr>

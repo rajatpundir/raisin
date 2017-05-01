@@ -21,7 +21,6 @@ class FloorsController < ApplicationController
 
 	def create
 		@floor = Floor.new(:floorname => params[:floor][:floorname], :tower_id => session[:tower_id])
-		@floor.forum = Forum.new
 		if @floor.save
 			flash[:success] = "Floor created successfully"
 			redirect_to(managements_path)

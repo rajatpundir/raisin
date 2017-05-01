@@ -28,12 +28,6 @@ Rails.application.routes.draw do
 		end
 	end
 
-	resources :hidden_floors do
-		member do
-			get :delete
-		end
-	end
-
 	resources :regulars do
 		member do
 			get :delete
@@ -58,13 +52,13 @@ Rails.application.routes.draw do
 		end
 	end
 
-	resources :forums do
+	resources :topics do
 		member do
 			get :delete
 		end
 	end
 
-	resources :topics do
+	resources :polls do
 		member do
 			get :delete
 		end

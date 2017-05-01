@@ -1,0 +1,22 @@
+<% @page_title = "Polls" %>
+<div class="center page-header">
+  <h2>Polls</h2>
+  <%= form_for(@floor, :url=> new_poll_path, :method => 'get' ) do |f| %>
+  <%= f.submit "Add new Poll", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @polls.each do |poll| %>
+    <tr>
+      <td><%= link_to(poll.title, poll_path(poll), :class => '') %></td>
+      <td>
+        <div >
+          <%= link_to("Show", poll_path(poll), :class => 'btn btn-info') %>
+          <%= link_to("Edit", edit_poll_path(poll), :class => 'btn btn-info') %>
+          <%= link_to("Delete", delete_poll_path(poll), :class => 'btn btn-info') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

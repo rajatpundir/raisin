@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403083438) do
+ActiveRecord::Schema.define(version: 20170501124819) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "subjective_id"
@@ -41,13 +41,6 @@ ActiveRecord::Schema.define(version: 20170403083438) do
     t.index ["tower_id"], name: "index_floors_on_tower_id"
   end
 
-  create_table "forums", force: :cascade do |t|
-    t.integer  "floor_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["floor_id"], name: "index_forums_on_floor_id"
-  end
-
   create_table "moderators", force: :cascade do |t|
     t.string   "username",        null: false
     t.string   "first_name"
@@ -75,7 +68,17 @@ ActiveRecord::Schema.define(version: 20170403083438) do
     t.index ["question_id"], name: "index_objectives_on_question_id"
   end
 
+  create_table "options", force: :cascade do |t|
+    t.string   "message"
+    t.integer  "poll_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_options_on_poll_id"
+  end
+
   create_table "polls", force: :cascade do |t|
+    t.string   "title",      null: false
+    t.text     "message"
     t.integer  "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -133,10 +136,11 @@ ActiveRecord::Schema.define(version: 20170403083438) do
 
   create_table "topics", force: :cascade do |t|
     t.string   "title",      null: false
-    t.integer  "forum_id"
+    t.text     "message"
+    t.integer  "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["forum_id"], name: "index_topics_on_forum_id"
+    t.index ["floor_id"], name: "index_topics_on_floor_id"
   end
 
   create_table "towers", force: :cascade do |t|

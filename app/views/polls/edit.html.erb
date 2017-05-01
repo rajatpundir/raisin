@@ -1,9 +1,8 @@
-<% @page_title = "Edit Notification"%>
+<% @page_title = "Edit Poll"%>
 <div class="center page-header">
-	<h2>Edit Notification</h2>
+	<h2>Edit Poll</h2>
 </div>
-<%= form_for(@notification,:url=> notification_path(@notification),:method => 'patch', :html => {:class => 'form-horizontal', :role => 'form'}) do |f| %>
-<%= hidden_field_tag :floor_id, @floor_id %>
+<%= form_for(@poll,:url=> poll_path(@poll),:method => 'patch', :html => {:class => 'form-horizontal', :role => 'form'}) do |f| %>
 <div class="form-group">
   <%= f.label :title, class: 'col-sm-2 control-label' %>
   <div class="col-sm-8">
