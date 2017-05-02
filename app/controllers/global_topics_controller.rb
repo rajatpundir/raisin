@@ -15,7 +15,7 @@ class GlobalTopicsController < ApplicationController
 	end
 
 	def add_global_post
-		@global_post = GlobalPost.new(:message => params[:global_post][:message], :global_topic_id => params[:global_topic_id])
+		@global_post = GlobalPost.new(:message => params[:global_post][:message], :global_topic_id => params[:global_topic_id], :origin => session[:username])
 		if @global_post.save
 			redirect_to global_topic_path(params[:global_topic_id])
 		else
@@ -31,7 +31,7 @@ class GlobalTopicsController < ApplicationController
 	end
 
 	def create
-		@global_topic = GlobalTopic.new(:title => params[:global_topic][:title], :message => params[:global_topic][:message], :tower_id => session[:tower_id])
+		@global_topic = GlobalTopic.new(:title => params[:global_topic][:title], :message => params[:global_topic][:message], :tower_id => session[:tower_id], :origin => session[:username])
 		if @global_topic.save
 			flash[:success] = "Topic created successfully."
 			redirect_to global_topics_path(tower_id: @global_topic.tower)

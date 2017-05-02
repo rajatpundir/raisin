@@ -63,7 +63,7 @@ class PollsController < ApplicationController
 	end
 
 	def create
-		@poll = Poll.new(:title => params[:poll][:title], :message => params[:poll][:message], :floor_id => session[:floor_id])
+		@poll = Poll.new(:title => params[:poll][:title], :message => params[:poll][:message], :floor_id => session[:floor_id], :origin => session[:username])
 		if @poll.save
 			flash[:success] = "Poll created successfully"
 			redirect_to polls_path(floor_id: session[:floor_id])

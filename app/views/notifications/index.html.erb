@@ -10,7 +10,7 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <% @notifications.each do |notification| %>
     <tr>
-      <td>Notification ID: <%= notification.id %></td>
+      <td><%= notification.origin + ": " + notification.title %></td>
       <td>
         <div >
           <%= link_to("Show", notification_path(notification), :class => 'btn btn-info') %>

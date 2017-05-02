@@ -1,4 +1,4 @@
-<% @page_title = @topic.title %>
+<% @page_title = "Forum" %>
 <div class="center page-header">
   <h3><%= simple_format(@topic.message) %></h3>
 </div>
@@ -20,6 +20,7 @@
     <% @posts.each do |post| %>
     <tr>
       <td>
+        <%= post.origin + ": " %>
         <%= simple_format(post.message) %>
       </td>
     </tr>

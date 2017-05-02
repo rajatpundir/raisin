@@ -10,7 +10,7 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <% @tags.each do |tag| %>
     <tr>
-      <td>Tag ID: <%= tag.id %></td>
+      <td><%= tag.origin + ": " + tag.id %></td>
       <td>
         <div >
           <%= link_to("Show", tag_path(tag), :class => 'btn btn-info') %>

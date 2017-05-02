@@ -20,7 +20,7 @@ class NotificationsController < ApplicationController
 	end
 
 	def create
-		@notification = Notification.new(:title => params[:notification][:title], :message => params[:notification][:message], :floor_id => params[:floor_id])
+		@notification = Notification.new(:title => params[:notification][:title], :message => params[:notification][:message], :floor_id => params[:floor_id], :origin => session[:username])
 		if @notification.save
 			flash[:success] = "Notification created successfully"
 			redirect_to notifications_path(floor_id: params[:floor_id])

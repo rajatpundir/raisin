@@ -22,7 +22,7 @@ class TagsController < ApplicationController
 	end
 
 	def create
-		@tag = Tag.new(:title => params[:tag][:title], :message => params[:tag][:message], :floor_id => params[:floor_id])
+		@tag = Tag.new(:title => params[:tag][:title], :message => params[:tag][:message], :floor_id => params[:floor_id], :origin => session[:username])
 		if @tag.save
 			flash[:success] = "Tag created successfully"
 			redirect_to tags_path(floor_id: params[:floor_id])

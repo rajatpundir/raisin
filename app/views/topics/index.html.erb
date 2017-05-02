@@ -10,7 +10,7 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <% @topics.each do |topic| %>
     <tr>
-      <td><%= link_to(topic.title, topic_path(topic), :class => '') %></td>
+      <td><%= link_to(topic.origin + ": " + topic.title, topic_path(topic), :class => '') %></td>
       <td>
         <div >
           <%= link_to("Show", topic_path(topic), :class => 'btn btn-info') %>

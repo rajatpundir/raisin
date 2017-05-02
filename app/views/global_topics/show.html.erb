@@ -1,4 +1,4 @@
-<% @page_title = @global_topic.title %>
+<% @page_title = "Forum" %>
 <div class="center page-header">
   <h3><%= simple_format(@global_topic.message) %></h3>
 </div>
@@ -20,6 +20,7 @@
     <% @global_posts.each do |global_post| %>
     <tr>
       <td>
+        <%= global_post.origin + ": " %>
         <%= simple_format(global_post.message) %>
       </td>
     </tr>

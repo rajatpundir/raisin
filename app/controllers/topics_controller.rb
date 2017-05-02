@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
 	end
 
 	def add_post
-		@post = Post.new(:message => params[:post][:message], :topic_id => params[:topic_id])
+		@post = Post.new(:message => params[:post][:message], :topic_id => params[:topic_id], :origin => session[:username])
 		if @post.save
 			redirect_to topic_path(params[:topic_id])
 		else
@@ -31,7 +31,7 @@ class TopicsController < ApplicationController
 	end
 
 	def create
-		@topic = Topic.new(:title => params[:topic][:title], :message => params[:topic][:message], :floor_id => session[:floor_id])
+		@topic = Topic.new(:title => params[:topic][:title], :message => params[:topic][:message], :floor_id => session[:floor_id], :origin => session[:username])
 		if @topic.save
 			flash[:success] = "Topic created successfully."
 			redirect_to topics_path(floor_id: @topic.floor)

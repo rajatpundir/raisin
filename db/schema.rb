@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
 
   create_table "global_posts", force: :cascade do |t|
     t.string   "message",         null: false
+    t.string   "origin"
     t.integer  "global_topic_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
   create_table "global_topics", force: :cascade do |t|
     t.string   "title",      null: false
     t.text     "message"
+    t.string   "origin"
     t.integer  "tower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
 
   create_table "moderator_posts", force: :cascade do |t|
     t.string   "message",            null: false
+    t.string   "origin"
     t.integer  "moderator_topic_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
@@ -69,6 +72,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
   create_table "moderator_topics", force: :cascade do |t|
     t.string   "title",      null: false
     t.text     "message"
+    t.string   "origin"
     t.integer  "tower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -89,6 +93,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
   create_table "notifications", force: :cascade do |t|
     t.string   "title",      null: false
     t.text     "message"
+    t.string   "origin"
     t.integer  "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -113,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
   create_table "polls", force: :cascade do |t|
     t.string   "title",      null: false
     t.text     "message"
+    t.string   "origin"
     t.integer  "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -121,6 +127,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "message",    null: false
+    t.string   "origin"
     t.integer  "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -155,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
   create_table "tags", force: :cascade do |t|
     t.string   "title"
     t.text     "message"
+    t.string   "origin"
     t.integer  "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -162,6 +170,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
   end
 
   create_table "tests", force: :cascade do |t|
+    t.string   "origin"
     t.integer  "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -171,6 +180,7 @@ ActiveRecord::Schema.define(version: 20170502133659) do
   create_table "topics", force: :cascade do |t|
     t.string   "title",      null: false
     t.text     "message"
+    t.string   "origin"
     t.integer  "floor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

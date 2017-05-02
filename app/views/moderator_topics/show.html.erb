@@ -1,4 +1,4 @@
-<% @page_title = @moderator_topic.title %>
+<% @page_title = "Forum" %>
 <div class="center page-header">
   <h3><%= simple_format(@moderator_topic.message) %></h3>
 </div>
@@ -20,6 +20,7 @@
     <% @moderator_posts.each do |moderator_post| %>
     <tr>
       <td>
+        <%= moderator_post.origin + ": " %>
         <%= simple_format(moderator_post.message) %>
       </td>
     </tr>

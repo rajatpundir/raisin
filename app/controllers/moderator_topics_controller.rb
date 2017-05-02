@@ -16,7 +16,7 @@ class ModeratorTopicsController < ApplicationController
 	end
 
 	def add_moderator_post
-		@moderator_post = ModeratorPost.new(:message => params[:moderator_post][:message], :moderator_topic_id => params[:moderator_topic_id])
+		@moderator_post = ModeratorPost.new(:message => params[:moderator_post][:message], :moderator_topic_id => params[:moderator_topic_id], :origin => session[:username])
 		if @moderator_post.save
 			redirect_to moderator_topic_path(params[:moderator_topic_id])
 		else
@@ -32,7 +32,7 @@ class ModeratorTopicsController < ApplicationController
 	end
 
 	def create
-		@moderator_topic = ModeratorTopic.new(:title => params[:moderator_topic][:title], :message => params[:moderator_topic][:message], :tower_id => session[:tower_id])
+		@moderator_topic = ModeratorTopic.new(:title => params[:moderator_topic][:title], :message => params[:moderator_topic][:message], :tower_id => session[:tower_id], :origin => session[:username])
 		if @moderator_topic.save
 			flash[:success] = "Topic created successfully."
 			redirect_to moderator_topics_path(tower_id: @moderator_topic.tower)
