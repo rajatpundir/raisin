@@ -30,6 +30,32 @@ class PollsController < ApplicationController
 		redirect_to edit_poll_path(@option.poll)
 	end
 
+	def vote
+		@poll = Poll.find(params[:poll_id])
+		@options = @poll.options
+		@options.each do |option|
+			@voters = option.voters
+			@voters.each do |voter|
+				if voter.username == session[:username]
+					voter.destroy
+				end
+			end
+		end
+		@options.each do |option|
+			if option.message == params[:option]
+				@voter = Voter.new(:username => session[:username], :option_id => option.id)
+				if @voter.save
+					flash[:success] = "You have successfully voted!"
+					redirect_to poll_path(params[:poll_id])
+				else
+					flash[:danger].now = "Your vote couldn't make a difference anyway!"
+					render 'new'
+				end
+				break
+			end
+		end
+	end
+
 	# CREATE ACTIONS
 	def new
 		@poll = Poll.new

@@ -8,10 +8,14 @@
   </p>
 </div>
 <div class="center well col-xs-6 col-xs-offset-3">
-  <%= form_tag '/polls/show', :method => 'get', class: 'form-horizontal', role: 'form' do %>
+  <%= form_tag '/polls/vote', :method => 'post', class: 'form-horizontal', role: 'form' do %>
     <%= hidden_field_tag :poll_id, @poll.id %>
     <% @poll.options.each do |option| %>
-      <%= radio_button_tag :option, option.message, autofocus: true %><%= simple_format(option.message) %><br>
+      <div id="margiretta">
+        <%= radio_button_tag :option, option.message, autofocus: true %><%= simple_format(option.message) %>
+        <%= label_tag 'Voters', 'Voted by:' %>
+        <%= option.voters.count %>
+      </div>
     <% end %>
     <div id="margiretta">
       <%= submit_tag "Vote!", class: 'btn btn-primary btn-lg' %>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 	post 'topics/add_post'
 	post 'polls/add_option'
 	get 'polls/delete_option'
+	post '/polls/vote'
 
 	resources :towers do
 		member do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501124819) do
+ActiveRecord::Schema.define(version: 20170502070308) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "subjective_id"
@@ -148,6 +148,14 @@ ActiveRecord::Schema.define(version: 20170501124819) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "voters", force: :cascade do |t|
+    t.string   "username",   null: false
+    t.integer  "option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_voters_on_option_id"
   end
 
 end

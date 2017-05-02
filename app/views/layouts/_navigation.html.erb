@@ -10,7 +10,7 @@
       <% if session[:usertype] == "regular" %>
         <%= link_to "Raisin", topics_path , class: "navbar-brand", id: "logo" %>
       <% elsif session[:user_id] == nil %>
-        <%= link_to "Raisin", '#' , class: "navbar-brand", id: "logo" %>
+        <%= link_to "Raisin", access_login_path , class: "navbar-brand", id: "logo" %>
       <% else %>
         <%= link_to "Raisin", managements_path , class: "navbar-brand", id: "logo" %>
       <% end %>
