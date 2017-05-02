@@ -1,0 +1,28 @@
+<% @page_title = @moderator_topic.title %>
+<div class="center page-header">
+  <h3><%= simple_format(@moderator_topic.message) %></h3>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+      <td>
+        <%= form_for(@moderator_post, :url=>  moderator_topics_add_moderator_post_path(@moderator_topic), :method => 'post', :html => {:class => 'form-horizontal', :role => 'form'} ) do |f| %>
+        <%= hidden_field_tag :moderator_topic_id, @moderator_topic.id %>
+        <div class="form-group">
+          <%= f.submit "Post", class: 'btn btn-danger' %>
+          <div class="col-sm-8">
+            <%= f.text_area :message,  rows: '1', class: 'form-control', placeholder: 'Say something...', autofocus: true %>
+          </div>
+        </div>
+        <% end %>
+      </td>
+    </tr>
+    <% @moderator_posts.each do |moderator_post| %>
+    <tr>
+      <td>
+        <%= simple_format(moderator_post.message) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

@@ -33,10 +33,10 @@ class GlobalTopicsController < ApplicationController
 	def create
 		@global_topic = GlobalTopic.new(:title => params[:global_topic][:title], :message => params[:global_topic][:message], :tower_id => session[:tower_id])
 		if @global_topic.save
-			flash[:success] = "Global Topic created successfully."
+			flash[:success] = "Topic created successfully."
 			redirect_to global_topics_path(tower_id: @global_topic.tower)
 		else
-			flash[:danger].now = "Global Topic couldn't be created."
+			flash[:danger].now = "Topic couldn't be created."
 			render 'new'
 		end
 	end
@@ -64,7 +64,7 @@ class GlobalTopicsController < ApplicationController
 	def destroy
 		@global_topic = GlobalTopic.find(params[:id])
 		@global_topic.destroy
-		flash[:success] = "GlobalTopic '#{@global_topic.title}' deleted successfully."
+		flash[:success] = "Topic '#{@global_topic.title}' deleted successfully."
 		redirect_to global_topics_path(tower_id: @global_topic.tower)
 	end
 

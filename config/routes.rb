@@ -7,10 +7,11 @@ Rails.application.routes.draw do
 	get 'access/logout'
 	get 'home/home_notification'
 	get 'home/home_tag'
-	post 'topics/add_post'
 	post 'polls/add_option'
 	get 'polls/delete_option'
 	post '/polls/vote'
+	post 'topics/add_post'
+	post 'moderator_topics/add_moderator_post'
 	post 'global_topics/add_global_post'
 
 	resources :towers do
@@ -56,6 +57,12 @@ Rails.application.routes.draw do
 	end
 
 	resources :topics do
+		member do
+			get :delete
+		end
+	end
+
+	resources :moderator_topics do
 		member do
 			get :delete
 		end
