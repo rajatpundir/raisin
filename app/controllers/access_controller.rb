@@ -4,7 +4,7 @@ class AccessController < ApplicationController
 
 	def menu
 		@username = session[:username]
-		redirect_to(floors_path)
+		redirect_to(global_topics_path)
 	end
 
 	def login
@@ -22,7 +22,7 @@ class AccessController < ApplicationController
 						session[:user_id] = authorized_user.id
 						session[:username] = "admin"
 						session[:usertype] = "admin"
-						redirect_to(floors_path)
+						redirect_to(global_topics_path)
 					else
 						flash.now[:danger] = "Invalid username or password."
 						render('login')
@@ -36,7 +36,7 @@ class AccessController < ApplicationController
 							session[:user_id] = authorized_user.id
 							session[:username] = authorized_user.username
 							session[:usertype] = "regular"
-							redirect_to(topics_path)
+							redirect_to(global_topics_path)
 						else
 							flash.now[:danger] = "Invalid username or password."
 						render('login')
@@ -53,7 +53,7 @@ class AccessController < ApplicationController
 							session[:user_id] = authorized_user.id
 							session[:username] = authorized_user.username
 							session[:usertype] = "moderator"
-							redirect_to(floors_path)
+							redirect_to(global_topics_path)
 						else
 							flash.now[:danger] = "Invalid username or password."
 							render('login')
