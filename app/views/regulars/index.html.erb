@@ -7,7 +7,7 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <% @regulars.each do |regular| %>
         <tr>
-          <td>Regular ID: <%= regular.id %></td>
+          <td><%= regular.username %></td>
           <td>
             <div >
             <%= link_to("Show", regular_path(regular), :class => 'btn btn-info') %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502070308) do
+ActiveRecord::Schema.define(version: 20170502112438) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "subjective_id"
@@ -39,6 +39,23 @@ ActiveRecord::Schema.define(version: 20170502070308) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tower_id"], name: "index_floors_on_tower_id"
+  end
+
+  create_table "global_posts", force: :cascade do |t|
+    t.string   "message",         null: false
+    t.integer  "global_topic_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["global_topic_id"], name: "index_global_posts_on_global_topic_id"
+  end
+
+  create_table "global_topics", force: :cascade do |t|
+    t.string   "title",      null: false
+    t.text     "message"
+    t.integer  "tower_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tower_id"], name: "index_global_topics_on_tower_id"
   end
 
   create_table "moderators", force: :cascade do |t|

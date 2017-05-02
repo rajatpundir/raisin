@@ -1,7 +1,6 @@
 class FloorsController < ApplicationController
 
 	before_action :confirm_logged_in
-	before_action :is_administrator
 
 
 	#READ ACTIONS
@@ -23,7 +22,7 @@ class FloorsController < ApplicationController
 		@floor = Floor.new(:floorname => params[:floor][:floorname], :tower_id => session[:tower_id])
 		if @floor.save
 			flash[:success] = "Floor created successfully"
-			redirect_to(managements_path)
+			redirect_to(floors_path)
 		else
 			flash[:danger].now = "Floor couldn't be created."
 			render 'new'
@@ -38,7 +37,7 @@ class FloorsController < ApplicationController
 	def update
 		@floor = Floor.find(params[:id])
 		if @floor.update_attributes(floor_params)
-			redirect_to (managements_path)
+			redirect_to (floors_path)
 		else
 			render 'edit'
 		end
@@ -53,7 +52,7 @@ class FloorsController < ApplicationController
 		@floor = Floor.find(params[:id])
 		@floor.destroy
 		flash[:success] = "Floor '#{@floor.floorname}' deleted successfully."
-		redirect_to(managements_path)
+		redirect_to(floors_path)
 	end
 
 	private

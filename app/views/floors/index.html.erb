@@ -7,7 +7,7 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <% @floors.each do |floor| %>
         <tr>
-          <td>Floor ID: <%= floor.id %></td>
+          <td><%= floor.floorname %></td>
           <td>
             <div >
             <%= link_to("Show", floor_path(floor), :class => 'btn btn-info') %>

@@ -12,7 +12,7 @@
       <% elsif session[:user_id] == nil %>
         <%= link_to "Raisin", access_login_path , class: "navbar-brand", id: "logo" %>
       <% else %>
-        <%= link_to "Raisin", managements_path , class: "navbar-brand", id: "logo" %>
+        <%= link_to "Raisin", floors_path , class: "navbar-brand", id: "logo" %>
       <% end %>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -23,6 +23,13 @@
           <li><%= link_to "Tests", '#' %></li>
           <li><%= link_to "Polls", polls_path %></li>
           <li><%= link_to "Forum", topics_path %></li>
+          <li><%= link_to "Global", global_topics_path %></li>
+        <% elsif session[:user_id] != nil %>
+          <% if session[:usertype] == "admin" %>
+            <li><%= link_to "Moderators", moderators_path %></li>
+          <% end %>
+          <li><%= link_to "Floors", floors_path %></li>
+          <li><%= link_to "Global", global_topics_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">

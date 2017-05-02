@@ -1,0 +1,2 @@
+module GlobalTopicsHelper
+end

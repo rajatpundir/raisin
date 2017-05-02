@@ -48,7 +48,7 @@ class PollsController < ApplicationController
 					flash[:success] = "You have successfully voted!"
 					redirect_to poll_path(params[:poll_id])
 				else
-					flash[:danger].now = "Your vote couldn't make a difference anyway!"
+					flash[:danger].now = "Sorry, your vote couldn't be registered!"
 					render 'new'
 				end
 				break

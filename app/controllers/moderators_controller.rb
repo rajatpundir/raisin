@@ -24,7 +24,7 @@ class ModeratorsController < ApplicationController
 			@moderator = Moderator.new(:username => params[:moderator][:username], :first_name => params[:moderator][:first_name], :last_name => params[:moderator][:last_name], :password => params[:moderator][:password], :tower_id => session[:user_id])
 			if @moderator.save
 				flash[:success] = "Moderator created successfully."
-				redirect_to(managements_path)
+				redirect_to(moderators_path)
 			else
 				flash[:danger].now = "Moderator couldn't be created."
 				render 'new'
@@ -40,7 +40,7 @@ class ModeratorsController < ApplicationController
 	def update
 		@moderator = Moderator.find(params[:id])
 		if @moderator.update_attributes(moderator_params)
-			redirect_to (managements_path)
+			redirect_to (moderators_path)
 		else
 			render 'edit'
 		end
@@ -55,7 +55,7 @@ class ModeratorsController < ApplicationController
 		@moderator = Moderator.find(params[:id])
 		@moderator.destroy
 		flash[:success] = "Moderator '#{@moderator.username}' deleted successfully."
-		redirect_to(managements_path)
+		redirect_to(moderators_path)
 	end
 
 	private

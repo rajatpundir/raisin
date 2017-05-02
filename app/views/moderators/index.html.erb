@@ -7,7 +7,7 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <% @moderators.each do |moderator| %>
         <tr>
-          <td>Moderator ID: <%= moderator.id %></td>
+          <td><%= moderator.username %></td>
           <td>
             <div >
             <%= link_to("Show", moderator_path(moderator), :class => 'btn btn-info') %>

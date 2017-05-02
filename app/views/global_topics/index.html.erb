@@ -1,0 +1,20 @@
+<% @page_title = "Forum" %>
+<div class="center page-header">
+  <h2>Global Forum</h2>
+    <%= link_to("Add New Global Topic", new_global_topic_path, :class => 'btn btn-info') %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @global_topics.each do |global_topic| %>
+    <tr>
+      <td><%= link_to(global_topic.title, global_topic_path(global_topic), :class => '') %></td>
+      <td>
+        <div >
+          <%= link_to("Show", global_topic_path(global_topic), :class => 'btn btn-info') %>
+          <%= link_to("Edit", edit_global_topic_path(global_topic), :class => 'btn btn-info') %>
+          <%= link_to("Delete", delete_global_topic_path(global_topic), :class => 'btn btn-info') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

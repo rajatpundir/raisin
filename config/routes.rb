@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 	root 'access#menu'
-	get 'management', :to => 'access#menu'
 	get 'access/menu'
 	get 'access/login'
 	post 'access/attempt_login'
@@ -12,6 +11,7 @@ Rails.application.routes.draw do
 	post 'polls/add_option'
 	get 'polls/delete_option'
 	post '/polls/vote'
+	post 'global_topics/add_global_post'
 
 	resources :towers do
 		member do
@@ -37,12 +37,6 @@ Rails.application.routes.draw do
 		end
 	end
 
-	resources :managements do
-		member do
-			get :delete
-		end
-	end
-
 	resources :notifications do
 		member do
 			get :delete
@@ -55,13 +49,19 @@ Rails.application.routes.draw do
 		end
 	end
 
+	resources :polls do
+		member do
+			get :delete
+		end
+	end
+
 	resources :topics do
 		member do
 			get :delete
 		end
 	end
 
-	resources :polls do
+	resources :global_topics do
 		member do
 			get :delete
 		end

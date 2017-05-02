@@ -1,0 +1,28 @@
+<% @page_title = @global_topic.title %>
+<div class="center page-header">
+  <h3><%= simple_format(@global_topic.message) %></h3>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+      <td>
+        <%= form_for(@global_post, :url=>  global_topics_add_global_post_path(@global_topic), :method => 'post', :html => {:class => 'form-horizontal', :role => 'form'} ) do |f| %>
+        <%= hidden_field_tag :global_topic_id, @global_topic.id %>
+        <div class="form-group">
+          <%= f.submit "Post", class: 'btn btn-danger' %>
+          <div class="col-sm-8">
+            <%= f.text_area :message,  rows: '1', class: 'form-control', placeholder: 'Say something...', autofocus: true %>
+          </div>
+        </div>
+        <% end %>
+      </td>
+    </tr>
+    <% @global_posts.each do |global_post| %>
+    <tr>
+      <td>
+        <%= simple_format(global_post.message) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
