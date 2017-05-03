@@ -10,7 +10,7 @@ class GlobalTopicsController < ApplicationController
 
 	def show
 		@global_topic = GlobalTopic.find(params[:id])
-		@global_posts = @global_topic.global_posts
+		@global_posts = @global_topic.global_posts.order('global_posts.created_at DESC')
 		@global_post = GlobalPost.new
 	end
 

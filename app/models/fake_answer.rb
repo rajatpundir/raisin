@@ -1,0 +1,2 @@
+class FakeAnswer < ApplicationRecord
+end

@@ -10,27 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502133659) do
+ActiveRecord::Schema.define(version: 20170503074857) do
 
-  create_table "answers", force: :cascade do |t|
-    t.integer  "subjective_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["subjective_id"], name: "index_answers_on_subjective_id"
-  end
-
-  create_table "choices", force: :cascade do |t|
-    t.integer  "objective_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["objective_id"], name: "index_choices_on_objective_id"
-  end
-
-  create_table "configurations", force: :cascade do |t|
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_configurations_on_question_id"
+  create_table "fake_answers", force: :cascade do |t|
+    t.text     "message",               null: false
+    t.integer  "objective_question_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["objective_question_id"], name: "index_fake_answers_on_objective_question_id"
   end
 
   create_table "floors", force: :cascade do |t|
@@ -100,11 +87,25 @@ ActiveRecord::Schema.define(version: 20170502133659) do
     t.index ["floor_id"], name: "index_notifications_on_floor_id"
   end
 
-  create_table "objectives", force: :cascade do |t|
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_objectives_on_question_id"
+  create_table "objective_questions", force: :cascade do |t|
+    t.text     "message",           null: false
+    t.text     "answer",            null: false
+    t.integer  "objective_test_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["objective_test_id"], name: "index_objective_questions_on_objective_test_id"
+  end
+
+  create_table "objective_tests", force: :cascade do |t|
+    t.string   "title",         null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "test_duration"
+    t.string   "origin"
+    t.integer  "floor_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["floor_id"], name: "index_objective_tests_on_floor_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -134,29 +135,16 @@ ActiveRecord::Schema.define(version: 20170502133659) do
     t.index ["topic_id"], name: "index_posts_on_topic_id"
   end
 
-  create_table "questions", force: :cascade do |t|
-    t.integer  "test_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["test_id"], name: "index_questions_on_test_id"
-  end
-
   create_table "regulars", force: :cascade do |t|
-    t.string   "username",        null: false
+    t.string   "username",            null: false
     t.string   "first_name"
     t.string   "last_name"
+    t.text     "attempted_questions"
     t.integer  "floor_id"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.index ["floor_id"], name: "index_regulars_on_floor_id"
-  end
-
-  create_table "subjectives", force: :cascade do |t|
-    t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["question_id"], name: "index_subjectives_on_question_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -167,14 +155,6 @@ ActiveRecord::Schema.define(version: 20170502133659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["floor_id"], name: "index_tags_on_floor_id"
-  end
-
-  create_table "tests", force: :cascade do |t|
-    t.string   "origin"
-    t.integer  "floor_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["floor_id"], name: "index_tests_on_floor_id"
   end
 
   create_table "topics", force: :cascade do |t|

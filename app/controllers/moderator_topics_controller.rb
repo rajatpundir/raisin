@@ -11,7 +11,7 @@ class ModeratorTopicsController < ApplicationController
 
 	def show
 		@moderator_topic = ModeratorTopic.find(params[:id])
-		@moderator_posts = @moderator_topic.moderator_posts
+		@moderator_posts = @moderator_topic.moderator_posts.order('moderator_posts.created_at DESC')
 		@moderator_post = ModeratorPost.new
 	end
 

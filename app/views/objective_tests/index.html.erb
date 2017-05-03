@@ -1,0 +1,29 @@
+<% @page_title = "Manage Tests" %>
+<div class="center page-header">
+  <h2>Manage Tests</h2>
+  <%= form_for(@floor, :url=> new_objective_test_path, :method => 'get' ) do |f| %>
+  <%= hidden_field_tag :floor_id, @floor.id %>
+  <%= f.submit "Add new Test", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @objective_tests.each do |objective_test| %>
+    <tr>
+      <td><%= objective_test.origin + ": " + objective_test.title %></td>
+      <td>
+        <div >
+          <%= link_to("Show", objective_test_path(objective_test), :class => 'btn btn-info') %>
+          <%= form_for(@floor, :url=> edit_objective_test_path(objective_test), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :floor_id, @floor.id %>
+          <%= f.submit "Edit", class: 'btn btn-info' %>
+          <% end %>
+          <%= form_for(@floor, :url=> delete_objective_test_path(objective_test), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :floor_id, @floor.id %>
+          <%= f.submit "Delete", class: 'btn btn-danger' %>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

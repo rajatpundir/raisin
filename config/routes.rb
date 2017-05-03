@@ -74,4 +74,16 @@ Rails.application.routes.draw do
 		end
 	end
 
+	resources :objective_tests do
+		member do
+			get :delete
+		end
+	end
+
+	resources :objective_questions do
+		member do
+			get :delete
+		end
+	end
+
 end

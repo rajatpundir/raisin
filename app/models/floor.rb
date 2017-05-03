@@ -7,6 +7,7 @@ class Floor < ApplicationRecord
 	has_many :tests, :dependent => :destroy
 	has_many :polls, :dependent => :destroy
 	has_many :topics, :dependent => :destroy
+	has_many :objective_tests, :dependent => :destroy
 
 	validates_presence_of :floorname
 

@@ -8,6 +8,10 @@
     <%= hidden_field_tag :floor_id, @floor.id %>
     <%= f.submit "Manage Tags", class: 'btn btn-primary' %>
     <% end %>
+    <%= form_for(@floor, :url=> objective_tests_path, :method => 'get' ) do |f| %>
+    <%= hidden_field_tag :floor_id, @floor.id %>
+    <%= f.submit "Manage Tests", class: 'btn btn-primary' %>
+    <% end %>
     <%= form_for(@floor, :url=> new_regular_path, :method => 'get' ) do |f| %>
     <%= hidden_field_tag :floor_id, @floor.id %>
     <%= f.submit "Add Regular", class: 'btn btn-primary' %>
