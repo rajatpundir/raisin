@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 	post 'topics/add_post'
 	post 'moderator_topics/add_moderator_post'
 	post 'global_topics/add_global_post'
+	post 'objective_questions/add_wrong_answer'
+	get 'objective_questions/delete_wrong_answer'
 
 	resources :towers do
 		member do
@@ -81,6 +83,12 @@ Rails.application.routes.draw do
 	end
 
 	resources :objective_questions do
+		member do
+			get :delete
+		end
+	end
+
+	resources :exams do
 		member do
 			get :delete
 		end

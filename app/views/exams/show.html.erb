@@ -1,0 +1,23 @@
+<% @page_title = "Exam" %>
+<div class="center page-header">
+  <h2><%= simple_format(@random_question.message) %></h2>
+</div>
+<div class="center well col-xs-6 col-xs-offset-3">
+  <%= form_tag '/exams/show', :method => 'get', class: 'form-horizontal', role: 'form' do %>
+    <%= hidden_field_tag :id, @objective_test.id %>
+    <%= hidden_field_tag :objective_question_id, @random_question.id %>
+    <% random_index = rand(0...(@random_wrong_answer.count)) %>
+    <% if random_index == 0 or @random_wrong_answer.count == 0%>
+      <%= radio_button_tag :answer, @random_question.answer, autofocus: true %><%= simple_format(@random_question.answer) %><br>
+    <% end %>
+    <% @random_wrong_answer.each_with_index do |random_wrong_answer, index| %>
+      <%= radio_button_tag :answer, random_wrong_answer.message, autofocus: true %><%= simple_format(random_wrong_answer.message) %><br>
+      <% if random_index == index + 1 %>
+      <%= radio_button_tag :answer, @random_question.answer, autofocus: true %><%= simple_format(@random_question.answer) %><br>
+       <% end %>
+    <% end %>
+    <div id="margiretta">
+      <%= submit_tag "Next", class: 'btn btn-primary btn-lg' %>
+    </div>
+  <% end %>
+</div>

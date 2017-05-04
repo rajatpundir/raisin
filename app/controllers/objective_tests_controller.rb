@@ -1,6 +1,7 @@
 class ObjectiveTestsController < ApplicationController
 
 	before_action :confirm_logged_in
+	before_action :is_not_regular
 	
 	#READ ACTIONS
 	def index
@@ -11,6 +12,7 @@ class ObjectiveTestsController < ApplicationController
 
 	def show
 		@objective_test = ObjectiveTest.find(params[:id])
+		@objective_questions = @objective_test.objective_questions
 	end
 
 	# CREATE ACTIONS
@@ -20,7 +22,7 @@ class ObjectiveTestsController < ApplicationController
 	end
 
 	def create
-		@objective_test = ObjectiveTest.new(:title => params[:objective_test][:title], :start_time => Time.now + params[:objective_test][:start_time].to_i, :end_time => Time.now + params[:objective_test][:end_time].to_i, :test_duration => params[:objective_test][:test_duration], :floor_id => params[:floor_id], :origin => session[:username])
+		@objective_test = ObjectiveTest.new(:title => params[:objective_test][:title], :start_time => Time.now.utc + params[:objective_test][:start_time].to_i, :end_time => Time.now.utc + params[:objective_test][:end_time].to_i, :test_duration => params[:objective_test][:test_duration], :floor_id => params[:floor_id], :origin => session[:username])
 		if @objective_test.save
 			flash[:success] = "Test created successfully"
 			redirect_to objective_tests_path(floor_id: params[:floor_id])
@@ -61,7 +63,7 @@ class ObjectiveTestsController < ApplicationController
 	private
 
 	def objective_test_params
-		params.require(:objective_test).permit(:title, :start_time, :end_time, :test_duration)
+		params.require(:objective_test).permit(:title, :start_time, :end_time, :test_duration, :visible)
 	end
 
 end

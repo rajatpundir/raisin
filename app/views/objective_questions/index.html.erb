@@ -1,0 +1,29 @@
+<% @page_title = "Manage Questions" %>
+<div class="center page-header">
+  <h2>Manage Questions</h2>
+  <%= form_for(@objective_test, :url=> new_objective_question_path, :method => 'get' ) do |f| %>
+  <%= hidden_field_tag :objective_test_id, @objective_test_id %>
+  <%= f.submit "Add new Question", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @objective_questions.each do |objective_question| %>
+    <tr>
+      <td><%= objective_question.origin + ": " + objective_question.message %></td>
+      <td>
+        <div >
+          <%= link_to("Show", objective_question_path(objective_question), :class => 'btn btn-info') %>
+          <%= form_for(@objective_test, :url=> edit_objective_question_path(objective_question), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :objective_test_id, @objective_test_id %>
+          <%= f.submit "Edit", class: 'btn btn-info' %>
+          <% end %>
+          <%= form_for(@objective_test, :url=> delete_objective_question_path(objective_question), :method => 'get' ) do |f| %>
+          <%= hidden_field_tag :objective_test_id, @objective_test_id %>
+          <%= f.submit "Delete", class: 'btn btn-danger' %>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

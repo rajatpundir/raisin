@@ -1,2 +1,0 @@
-class FakeAnswer < ApplicationRecord
-end

@@ -18,7 +18,7 @@
         <% if session[:usertype] == "regular" %>
           <li><%= link_to "Notifications", home_home_notification_path %></li>
           <li><%= link_to "Tags", home_home_tag_path %></li>
-          <li><%= link_to "Tests", '#' %></li>
+          <li><%= link_to "Tests", exams_path %></li>
           <li><%= link_to "Polls", polls_path %></li>
           <li><%= link_to "Local", topics_path %></li>
           <li><%= link_to "Global", global_topics_path %></li>

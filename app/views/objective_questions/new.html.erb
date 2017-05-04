@@ -1,0 +1,24 @@
+<% @page_title = "Create Question" %>
+<div class="center page-header">
+	<h2>Create Question</h2>
+</div>
+<%= form_for(@objective_question, :url=> objective_questions_path, :method => 'post', :html => {:class => 'form-horizontal', :role => 'form'} ) do |f| %>
+<%= hidden_field_tag :objective_test_id, @objective_test_id %>
+<div class="form-group">
+  <%= f.label :message, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-8">
+    <%= f.text_area :message,  rows: '10', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :answer, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-8">
+    <%= f.text_area :answer,  rows: '10', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
+  </div>
+</div>
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<%= f.submit "Create Question", class: 'btn btn-primary btn-lg' %>
+	</div>
+</div>
+<% end %>

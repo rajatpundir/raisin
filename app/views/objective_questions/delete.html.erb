@@ -1,0 +1,13 @@
+<% @page_title = "Delete Question"%>
+<%= form_for(@objective_question,:method => 'delete') do |f| %>
+<%= hidden_field_tag :objective_test_id, @objective_test_id %>
+<div class="center page-header">
+  <h2><%= f.object.title %>?</h2>
+</div>
+    <div class="center form-group">
+      <p>Are you sure you wish to permanently delete this?</p>
+      <div class="col-sm-12">
+        <%= f.submit "Delete Question",class: 'btn btn-danger btn-lg' %>
+      </div>
+    </div>
+<% end %>

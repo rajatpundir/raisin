@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503074857) do
+ActiveRecord::Schema.define(version: 20170503111400) do
 
-  create_table "fake_answers", force: :cascade do |t|
-    t.text     "message",               null: false
-    t.integer  "objective_question_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.index ["objective_question_id"], name: "index_fake_answers_on_objective_question_id"
+  create_table "exam_records", force: :cascade do |t|
+    t.text     "attempted_questions", default: ""
+    t.integer  "score",               default: 0
+    t.datetime "test_started_at"
+    t.integer  "objective_test_id"
+    t.integer  "regular_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["objective_test_id"], name: "index_exam_records_on_objective_test_id"
+    t.index ["regular_id"], name: "index_exam_records_on_regular_id"
   end
 
   create_table "floors", force: :cascade do |t|
@@ -90,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170503074857) do
   create_table "objective_questions", force: :cascade do |t|
     t.text     "message",           null: false
     t.text     "answer",            null: false
+    t.string   "origin"
     t.integer  "objective_test_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
@@ -97,14 +102,15 @@ ActiveRecord::Schema.define(version: 20170503074857) do
   end
 
   create_table "objective_tests", force: :cascade do |t|
-    t.string   "title",         null: false
+    t.string   "title",                         null: false
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "test_duration"
+    t.boolean  "visible",       default: false
     t.string   "origin"
     t.integer  "floor_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["floor_id"], name: "index_objective_tests_on_floor_id"
   end
 
@@ -180,6 +186,14 @@ ActiveRecord::Schema.define(version: 20170503074857) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["option_id"], name: "index_voters_on_option_id"
+  end
+
+  create_table "wrong_answers", force: :cascade do |t|
+    t.text     "message",               null: false
+    t.integer  "objective_question_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["objective_question_id"], name: "index_wrong_answers_on_objective_question_id"
   end
 
 end

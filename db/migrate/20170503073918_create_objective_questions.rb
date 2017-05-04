@@ -3,6 +3,7 @@ class CreateObjectiveQuestions < ActiveRecord::Migration[5.0]
     create_table :objective_questions do |t|
     	t.text :message, :null => false
     	t.text :answer, :null => false
+    	t.string :origin
     	t.references :objective_test
       t.timestamps
     end

@@ -3,7 +3,6 @@ class FloorsController < ApplicationController
 	before_action :confirm_logged_in
 	before_action :is_administrator, :except => [:index, :show]
 
-
 	#READ ACTIONS
 	def index
 		@floors = Floor.all

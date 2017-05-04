@@ -1,0 +1,18 @@
+<% @page_title = "Tests" %>
+<div class="center page-header">
+  <h2>Tests</h2>
+</div>
+<div class="col-xs-8 col-xs-offset-2 well well-lg">
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <% @objective_tests.each do |objective_test| %>
+    <tr>
+      <td><%= objective_test.title %></td>
+      <td>Starts in: <%= (objective_test.start_time - Time.now)/60 %> minutes</td>
+      <td>Ends in: <%= (objective_test.end_time - Time.now)/60 %> minutes</td>
+      <td>
+        <%= link_to("Start", exam_path(objective_test), :class => 'btn btn-info') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

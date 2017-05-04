@@ -1,6 +1,7 @@
 class Regular < ApplicationRecord
 
 	belongs_to :floor
+	has_many :exam_records
 	has_secure_password
 
 	validates_presence_of :username, :password

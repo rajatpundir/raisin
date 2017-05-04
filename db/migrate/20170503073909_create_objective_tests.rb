@@ -3,8 +3,9 @@ class CreateObjectiveTests < ActiveRecord::Migration[5.0]
     create_table :objective_tests do |t|
     	t.string :title, :null => false
     	t.datetime :start_time
-    	t.datetime :end_time
+      t.datetime :end_time
     	t.integer :test_duration
+      t.boolean :visible, :default => false
       t.string :origin
     	t.references :floor
       t.timestamps
