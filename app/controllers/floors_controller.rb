@@ -5,7 +5,8 @@ class FloorsController < ApplicationController
 
 	#READ ACTIONS
 	def index
-		@floors = Floor.all
+		@tower = Tower.find(session[:tower_id])
+		@floors = @tower.floors
 	end
 
 	def show
