@@ -1,13 +1,13 @@
-$navbar-default-bg: #009688;
+$navbar-default-bg: #c7c5e6;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-ul.nav a { color: #004d40 !important; }
+ul.nav a { color: #79589F !important; }
 ul.nav a:hover { color: white !important; }
 
 body {
-  background-color: #009688 !important;
+  background-color: #79589F !important;
   padding-top: 70px;
 }
 
@@ -21,7 +21,7 @@ body {
 #logo{
   float: left;
   font-size: 1.7em;
-  color: #004d40;
+  color: #79589F;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
@@ -55,7 +55,7 @@ body {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px;
-  color: #004d40;
+  color: #79589F;
 }
 
 .footer small {
