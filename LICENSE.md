@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017 Rajat Pundir, Prateek Alakh, Himanshu Pant
+Copyright (c) 2017 Rajat Pundir, Prateek Alakh and Himanshu Pant
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -3,7 +3,7 @@ class ExamsController < ApplicationController
 	before_action :confirm_logged_in
 
 	def index
-		@objective_tests = ObjectiveTest.where(:visible => true);
+		@objective_tests = ObjectiveTest.where(:visible => true).order('objective_tests.created_at DESC');
 	end
 
 	def show

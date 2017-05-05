@@ -7,7 +7,7 @@ class ObjectiveTestsController < ApplicationController
 	def index
 		@floor = Floor.find(params[:floor_id])
 		@floor_id = params[:floor_id]
-		@objective_tests = @floor.objective_tests
+		@objective_tests = @floor.objective_tests.order('objective_tests.created_at DESC')
 	end
 
 	def show

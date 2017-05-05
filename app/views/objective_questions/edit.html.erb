@@ -7,13 +7,13 @@
 <div class="form-group">
 	<%= f.label :message, class: 'col-sm-2 control-label' %>
 	<div class="col-sm-8">
-		<%= f.text_area :message,  rows: '10', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
+		<%= f.text_area :message,  rows: '5', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
 	</div>
 </div>
 <div class="form-group">
 	<%= f.label :answer, class: 'col-sm-2 control-label' %>
 	<div class="col-sm-8">
-		<%= f.text_area :answer,  rows: '10', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
+		<%= f.text_area :answer,  rows: '5', class: 'form-control', placeholder: 'Enter message', autofocus: true %>
 	</div>
 </div>
 <div class="form-group">
@@ -22,16 +22,16 @@
 	</div>
 </div>
 <% end %>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
+<div class="col-xs-8 col-xs-offset-2">
   <table class="table table-bordered table-striped table-hover table-condensed">
     <tr>
       <td>
         <%= form_for(@wrong_answer, :url=>  objective_questions_add_wrong_answer_path(@objective_question), :method => 'post', :html => {:class => 'form-horizontal', :role => 'form'} ) do |f| %>
 			<%= hidden_field_tag :objective_question_id, @objective_question.id %>
 			<div class="form-group">
-			  <%= f.submit "Add Wrong answer", class: 'btn btn-danger' %>
+			  <%= f.submit "Add Incorrect answer", class: 'btn btn-info' %>
 			  <div class="col-sm-8">
-			    <%= f.text_area :message,  rows: '1', class: 'form-control', placeholder: 'Add wrong_answer...', autofocus: true %>
+			    <%= f.text_area :message,  rows: 5, class: 'form-control', placeholder: 'Type incorrect answer here...', autofocus: true %>
 			  </div>
 			</div>
 		<% end %>
@@ -42,7 +42,7 @@
       <td>
         <%= simple_format(wrong_answer.message) %>
       </td>
-      <td> <%= link_to("Delete", objective_questions_delete_wrong_answer_path(wrong_answer), :class => 'btn btn-info') %> </td>
+      <td> <%= link_to("Delete", objective_questions_delete_wrong_answer_path(wrong_answer), :class => 'btn btn-danger') %> </td>
     </tr>
     <% end %>
   </table>

@@ -1,36 +1,56 @@
+<% @page_title = @floor.floorname %>
 <div class="center page-header">
   <h2><%= @floor.floorname %></h2>
-    <%= form_for(@floor, :url=> notifications_path, :method => 'get' ) do |f| %>
-    <%= hidden_field_tag :floor_id, @floor.id %>
-    <%= f.submit "Manage Notifications", class: 'btn btn-primary' %>
-    <% end %>
-    <%= form_for(@floor, :url=> tags_path, :method => 'get' ) do |f| %>
-    <%= hidden_field_tag :floor_id, @floor.id %>
-    <%= f.submit "Manage Tags", class: 'btn btn-primary' %>
-    <% end %>
-    <%= form_for(@floor, :url=> objective_tests_path, :method => 'get' ) do |f| %>
-    <%= hidden_field_tag :floor_id, @floor.id %>
-    <%= f.submit "Manage Tests", class: 'btn btn-primary' %>
-    <% end %>
-    <%= form_for(@floor, :url=> new_regular_path, :method => 'get' ) do |f| %>
-    <%= hidden_field_tag :floor_id, @floor.id %>
-    <%= f.submit "Add Regular", class: 'btn btn-primary' %>
-    <% end %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @regulars.each do |regular| %>
-    <tr>
-      <td><%= regular.username %></td>
+<div id="left">
+  <div class="col-xs-8 col-xs-offset-2">
+    <table class="table table-bordered table-striped table-hover table-condensed">
+      <% @regulars.each do |regular| %>
+      <tr>
+        <td><%= link_to(regular.username, regular_path(regular)) %></td>
+        <td>
+            <%= link_to("Edit", edit_regular_path(regular)) %>
+            <%= link_to("Delete", delete_regular_path(regular)) %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+    </div>
+</div>
+<div id="right">
+  <table class="table table-condensed">
+  <tr>
       <td>
-        <div>
-          <%= link_to("Show", regular_path(regular), :class => 'btn btn-info') %>
-          <%= link_to("Edit", edit_regular_path(regular), :class => 'btn btn-info') %>
-          <%= link_to("Delete", delete_regular_path(regular), :class => 'btn btn-danger') %>
-        </div>
+        <%= form_for(@floor, :url=> new_regular_path, :method => 'get' ) do |f| %>
+        <%= hidden_field_tag :floor_id, @floor.id %>
+        <%= f.submit "Add Regular", class: 'btn btn-primary' %>
+        <% end %>
       </td>
     </tr>
-    <% end %>
+    <tr>
+      <td>
+        <%= form_for(@floor, :url=> notifications_path, :method => 'get' ) do |f| %>
+        <%= hidden_field_tag :floor_id, @floor.id %>
+        <%= f.submit "Notifications", class: 'btn btn-primary' %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= form_for(@floor, :url=> tags_path, :method => 'get' ) do |f| %>
+        <%= hidden_field_tag :floor_id, @floor.id %>
+        <%= f.submit "Tags", class: 'btn btn-primary' %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= form_for(@floor, :url=> objective_tests_path, :method => 'get' ) do |f| %>
+        <%= hidden_field_tag :floor_id, @floor.id %>
+        <%= f.submit "Tests", class: 'btn btn-primary' %>
+        <% end %>
+      </td>
+    </tr>
   </table>
 </div>
-

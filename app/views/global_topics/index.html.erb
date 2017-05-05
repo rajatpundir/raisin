@@ -1,20 +1,28 @@
-<% @page_title = "Forum" %>
+<% @page_title = "Global Forum" %>
 <div class="center page-header">
   <h2>Global Forum</h2>
-    <%= link_to("Start new Topic", new_global_topic_path, :class => 'btn btn-info') %>
+  <%= link_to("Ask Question", new_global_topic_path, :class => 'btn btn-primary') %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @global_topics.each do |global_topic| %>
-    <tr>
-      <td><%= link_to(global_topic.origin + ": " + global_topic.title, global_topic_path(global_topic), :class => '') %></td>
-      <td>
-        <div >
-          <%= link_to("Show", global_topic_path(global_topic), :class => 'btn btn-info') %>
-          <%= link_to("Edit", edit_global_topic_path(global_topic), :class => 'btn btn-info') %>
-          <%= link_to("Delete", delete_global_topic_path(global_topic), :class => 'btn btn-info') %>
-      </td>
-    </tr>
+<div class="col-xs-7 col-xs-offset-2">
+ <% @global_topics.each do |global_topic| %>
+ <div class="entry">
+  <%= link_to(global_topic.title, global_topic_path(global_topic)) %>
+  <p class="meta">
+    <span class="date">
+      <%= time_ago_in_words(global_topic.created_at) %> ago
+    </span>
+    <% if session[:username] != global_topic.origin %>
+    <span>
+      Posted by <%= global_topic.origin %>
+    </span>
     <% end %>
-  </table>
+    <% if session[:username] == global_topic.origin or session[:username] == "admin" %>
+    <span>
+      <%= link_to("Edit", edit_global_topic_path(global_topic)) %>
+      <%= link_to("Delete", delete_global_topic_path(global_topic)) %>
+    </span>
+     <% end %>
+  </p>
+</div>
+<% end %>
 </div>

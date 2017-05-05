@@ -1,15 +1,16 @@
-<% @page_title = "Tower Management" %>
+<% @page_title = "Tags" %>
 <div class="center page-header">
   <h2>Tags</h2>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @tags.each do |tag| %>
-    <tr>
-      <td>
-        <%= link_to(tag.title, tag_path(tag), :class => '') %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+<div class="col-xs-7 col-xs-offset-2">
+  <% @tags.each do |tag| %>
+  <div class="entry">
+    <%= link_to(tag.title, home_home_tag_show_path(tag)) %>
+    <p class="meta">
+      <span class="date">
+        <%= time_ago_in_words(tag.created_at) %> ago
+      </span>
+    </p>
+  </div>
+  <% end %>
 </div>

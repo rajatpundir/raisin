@@ -1,14 +1,13 @@
 class TagsController < ApplicationController
 
 	before_action :confirm_logged_in
-	
-	before_action :confirm_logged_in
+	before_action :is_not_regular
 	
 	#READ ACTIONS
 	def index
 		@floor = Floor.find(params[:floor_id])
 		@floor_id = params[:floor_id]
-		@tags = @floor.tags
+		@tags = @floor.tags.order('tags.created_at DESC')
 	end
 
 	def show

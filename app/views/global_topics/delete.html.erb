@@ -1,4 +1,4 @@
-<% @page_title = "Delete Topic"%>
+<% @page_title = "Delete Question"%>
 <%= form_for(@global_topic,:method => 'delete') do |f| %>
 <div class="center page-header">
   <h2><%= f.object.title %>?</h2>
@@ -6,7 +6,7 @@
     <div class="center form-group">
       <p>Are you sure you wish to permanently delete this?</p>
       <div class="col-sm-12">
-        <%= f.submit "Delete Topic",class: 'btn btn-danger btn-lg' %>
+        <%= f.submit "Delete Question",class: 'btn btn-danger btn-lg' %>
       </div>
     </div>
 <% end %>

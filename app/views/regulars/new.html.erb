@@ -5,12 +5,6 @@
 <%= form_for(@regular, :url=> regulars_path, :method => 'post', :html => {:class => 'form-horizontal', :role => 'form'} ) do |f| %>
 <%= hidden_field_tag :floor_id, @floor_id %>
 <div class="form-group">
-  <%= f.label :username, class: 'col-sm-2 control-label' %>
-  <div class="col-sm-8">
-    <%= f.text_field :username,  rows: '10', class: 'form-control', placeholder: 'Enter username', autofocus: true %>
-  </div>
-</div>
-<div class="form-group">
   <%= f.label :first_name, class: 'col-sm-2 control-label' %>
   <div class="col-sm-8">
     <%= f.text_field :first_name,  rows: '10', class: 'form-control', placeholder: 'Enter first name', autofocus: true %>
@@ -20,6 +14,12 @@
   <%= f.label :last_name, class: 'col-sm-2 control-label' %>
   <div class="col-sm-8">
     <%= f.text_field :last_name,  rows: '10', class: 'form-control', placeholder: 'Enter last name', autofocus: true %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :username, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-8">
+    <%= f.text_field :username,  rows: '10', class: 'form-control', placeholder: 'Enter username', autofocus: true %>
   </div>
 </div>
 <div class="form-group">

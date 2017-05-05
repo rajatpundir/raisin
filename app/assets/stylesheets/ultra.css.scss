@@ -1,0 +1,49 @@
+#left{
+width:68%;
+float:left;
+}
+
+#right{
+margin-left:70%;
+margin-top:-15px;
+}
+
+.entry{
+position:relative;
+margin:20px 0 20px 0;
+border:2px solid #eaeaea;
+background:#eee url(images/entrybg.png) repeat-x;
+color:#333;
+padding:10px 10px 0 10px;
+}
+
+.meta{
+clear:both;
+border-top: 2px solid #ccc;
+padding: 5px 1px 0 0;
+margin:10px 0 0 0;
+text-align:right;
+font-size:0.9em;
+color: #567;
+}
+
+.date{
+display:block;
+float:left;
+font-weight:bold;
+}
+
+a{
+text-decoration:none;
+color:#269;
+font-weight:bold;
+}
+
+a:hover{
+text-decoration:underline;
+}
+
+p{
+margin:0 0 15px 0;
+line-height:1.5em;
+}

@@ -6,7 +6,7 @@ class PollsController < ApplicationController
 	def index
 		@floor = Floor.find(session[:floor_id])
 		@floor_id = session[:floor_id]
-		@polls = @floor.polls
+		@polls = @floor.polls.order('polls.created_at DESC')
 	end
 
 	def show

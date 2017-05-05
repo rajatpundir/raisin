@@ -5,7 +5,7 @@ class GlobalTopicsController < ApplicationController
 	#READ ACTIONS
 	def index
 		@tower = Tower.find(session[:tower_id])
-		@global_topics = @tower.global_topics
+		@global_topics = @tower.global_topics.order('global_topics.created_at DESC')
 	end
 
 	def show

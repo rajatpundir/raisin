@@ -1,23 +1,28 @@
-<% @page_title = "Forum" %>
+<% @page_title = "Local Forum" %>
 <div class="center page-header">
   <h2>Local Forum</h2>
-    <%= form_for(@floor, :url=> new_topic_path, :method => 'get' ) do |f| %>
-    <%= hidden_field_tag :floor_id, @floor.id %>
-    <%= f.submit "Start new Topic", class: 'btn btn-primary' %>
-    <% end %>
+  <%= link_to("Ask Question", new_topic_path, :class => 'btn btn-primary') %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @topics.each do |topic| %>
-    <tr>
-      <td><%= link_to(topic.origin + ": " + topic.title, topic_path(topic), :class => '') %></td>
-      <td>
-        <div >
-          <%= link_to("Show", topic_path(topic), :class => 'btn btn-info') %>
-          <%= link_to("Edit", edit_topic_path(topic), :class => 'btn btn-info') %>
-          <%= link_to("Delete", delete_topic_path(topic), :class => 'btn btn-info') %>
-      </td>
-    </tr>
+<div class="col-xs-7 col-xs-offset-2">
+ <% @topics.each do |topic| %>
+ <div class="entry">
+  <%= link_to(topic.title, topic_path(topic)) %>
+  <p class="meta">
+    <span class="date">
+      <%= time_ago_in_words(topic.created_at) %> ago
+    </span>
+    <% if session[:username] != topic.origin %>
+    <span>
+      Posted by <%= topic.origin %>
+    </span>
     <% end %>
-  </table>
+    <% if session[:username] == topic.origin or session[:username] == "admin" %>
+    <span>
+      <%= link_to("Edit", edit_topic_path(topic)) %>
+      <%= link_to("Delete", delete_topic_path(topic)) %>
+    </span>
+     <% end %>
+  </p>
+</div>
+<% end %>
 </div>

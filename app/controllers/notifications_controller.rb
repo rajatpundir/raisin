@@ -1,12 +1,13 @@
 class NotificationsController < ApplicationController
 
 	before_action :confirm_logged_in
+	before_action :is_not_regular
 	
 	#READ ACTIONS
 	def index
 		@floor = Floor.find(params[:floor_id])
 		@floor_id = params[:floor_id]
-		@notifications = @floor.notifications
+		@notifications = @floor.notifications.order('notifications.created_at DESC')
 	end
 
 	def show

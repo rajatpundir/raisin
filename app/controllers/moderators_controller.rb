@@ -4,7 +4,8 @@ class ModeratorsController < ApplicationController
 
 	#READ ACTIONS
 	def index
-		@moderators = Moderator.all
+		@tower = Tower.find(session[:tower_id])
+		@moderators = @tower.moderators.order('moderators.created_at DESC')
 	end
 
 	def show

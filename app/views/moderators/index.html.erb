@@ -1,21 +1,16 @@
-<% @page_title = "Manage Moderators" %>
+<% @page_title = "Moderators" %>
 <div class="center page-header">
-  <h2>Manage Moderators</h2>
+  <h2>Moderators</h2>
   <%= link_to "Add new Moderator", new_moderator_path, :class => 'btn btn-primary' %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @moderators.each do |moderator| %>
-        <tr>
-          <td><%= moderator.username %></td>
-          <td>
-            <div >
-            <%= link_to("Show", moderator_path(moderator), :class => 'btn btn-info') %>
-            <%= link_to("Edit", edit_moderator_path(moderator), :class => 'btn btn-info') %>
-            <%= link_to("Delete", delete_moderator_path(moderator), :class => 'btn btn-danger') %>
-            </div>
-          </td>
-        </tr>
-    <% end %>
-  </table>
+<div class="col-xs-7 col-xs-offset-2">
+  <% @moderators.each do |moderator| %>
+  <div class="entry">
+  <%= link_to(moderator.username, moderator_path(moderator)) %>
+    <p class="meta">
+      <%= link_to("Edit", edit_moderator_path(moderator)) %>
+      <%= link_to("Delete", delete_moderator_path(moderator)) %>
+    </p>
+  </div>
+  <% end %>
 </div>

@@ -7,7 +7,7 @@ class ObjectiveQuestionsController < ApplicationController
 	def index
 		@objective_test = ObjectiveTest.find(params[:objective_test_id])
 		@objective_test_id = params[:objective_test_id]
-		@objective_questions = @objective_test.objective_questions
+		@objective_questions = @objective_test.objective_questions.order('objective_questions.created_at DESC')
 	end
 
 	def show

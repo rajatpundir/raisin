@@ -6,7 +6,7 @@ class ModeratorTopicsController < ApplicationController
 	#READ ACTIONS
 	def index
 		@tower = Tower.find(session[:tower_id])
-		@moderator_topics = @tower.moderator_topics
+		@moderator_topics = @tower.moderator_topics.order('moderator_topics.created_at DESC')
 	end
 
 	def show

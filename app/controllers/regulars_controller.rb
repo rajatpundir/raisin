@@ -19,13 +19,18 @@ class RegularsController < ApplicationController
 	end
 
 	def create
-		@regular = Regular.new(:username => params[:regular][:username], :password => params[:regular][:password], :first_name => params[:regular][:first_name], :last_name => params[:regular][:last_name], :floor_id => params[:floor_id])
-		if @regular.save
-			flash[:success] = "Regular created successfully."
+		if params[:regular][:username] == "admin" or Moderator.find_by_username(params[:regular][:username]) != nil
+			flash[:danger] = "Username not available."
 			redirect_to(floor_path(params[:floor_id]))
 		else
-			flash[:danger].now = "Regular couldn't be created."
-			render 'new'
+			@regular = Regular.new(:username => params[:regular][:username], :password => params[:regular][:password], :first_name => params[:regular][:first_name], :last_name => params[:regular][:last_name], :floor_id => params[:floor_id])
+			if @regular.save
+				flash[:success] = "Regular created successfully."
+				redirect_to(floor_path(params[:floor_id]))
+			else
+				flash[:danger].now = "Regular couldn't be created."
+				render 'new'
+			end
 		end
 	end
 
@@ -37,7 +42,7 @@ class RegularsController < ApplicationController
 	def update
 		@regular = Regular.find(params[:id])
 		if @regular.update_attributes(regular_params)
-			redirect_to (regulars_path)
+			redirect_to(floor_path(@regular.floor))
 		else
 			render 'edit'
 		end
@@ -52,7 +57,7 @@ class RegularsController < ApplicationController
 		@regular = Regular.find(params[:id])
 		@regular.destroy
 		flash[:success] = "Regular '#{@regular.username}' deleted successfully."
-		redirect_to(regulars_path)
+		redirect_to(floor_path(@regular.floor))
 	end
 
 	private

@@ -1,20 +1,28 @@
-<% @page_title = "Forum" %>
+<% @page_title = "Local Forum" %>
 <div class="center page-header">
   <h2>Local Forum</h2>
-    <%= link_to("Start new Topic", new_moderator_topic_path, :class => 'btn btn-info') %>
+  <%= link_to("Ask Question", new_moderator_topic_path, :class => 'btn btn-primary') %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @moderator_topics.each do |moderator_topic| %>
-    <tr>
-      <td><%= link_to(moderator_topic.origin + ": " + moderator_topic.title, moderator_topic_path(moderator_topic), :class => '') %></td>
-      <td>
-        <div >
-          <%= link_to("Show", moderator_topic_path(moderator_topic), :class => 'btn btn-info') %>
-          <%= link_to("Edit", edit_moderator_topic_path(moderator_topic), :class => 'btn btn-info') %>
-          <%= link_to("Delete", delete_moderator_topic_path(moderator_topic), :class => 'btn btn-info') %>
-      </td>
-    </tr>
+<div class="col-xs-7 col-xs-offset-2">
+ <% @moderator_topics.each do |moderator_topic| %>
+ <div class="entry">
+  <%= link_to(moderator_topic.title, moderator_topic_path(moderator_topic)) %>
+  <p class="meta">
+    <span class="date">
+      <%= time_ago_in_words(moderator_topic.created_at) %> ago
+    </span>
+    <% if session[:username] != moderator_topic.origin %>
+    <span>
+      Posted by <%= moderator_topic.origin %>
+    </span>
     <% end %>
-  </table>
+    <% if session[:username] == moderator_topic.origin or session[:username] == "admin" %>
+    <span>
+      <%= link_to("Edit", edit_moderator_topic_path(moderator_topic)) %>
+      <%= link_to("Delete", delete_moderator_topic_path(moderator_topic)) %>
+    </span>
+     <% end %>
+  </p>
+</div>
+<% end %>
 </div>

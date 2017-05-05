@@ -1,29 +1,46 @@
-<% @page_title = "Manage Questions" %>
+<% @page_title = "Questions" %>
 <div class="center page-header">
-  <h2>Manage Questions</h2>
+  <h2>Questions for <%= @objective_test.title %></h2>
   <%= form_for(@objective_test, :url=> new_objective_question_path, :method => 'get' ) do |f| %>
   <%= hidden_field_tag :objective_test_id, @objective_test_id %>
   <%= f.submit "Add new Question", class: 'btn btn-primary' %>
   <% end %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @objective_questions.each do |objective_question| %>
-    <tr>
-      <td><%= objective_question.origin + ": " + objective_question.message %></td>
-      <td>
-        <div >
-          <%= link_to("Show", objective_question_path(objective_question), :class => 'btn btn-info') %>
-          <%= form_for(@objective_test, :url=> edit_objective_question_path(objective_question), :method => 'get' ) do |f| %>
-          <%= hidden_field_tag :objective_test_id, @objective_test_id %>
-          <%= f.submit "Edit", class: 'btn btn-info' %>
-          <% end %>
-          <%= form_for(@objective_test, :url=> delete_objective_question_path(objective_question), :method => 'get' ) do |f| %>
-          <%= hidden_field_tag :objective_test_id, @objective_test_id %>
-          <%= f.submit "Delete", class: 'btn btn-danger' %>
-          <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+<div class="col-xs-7 col-xs-offset-2">
+  <% @objective_questions.each do |objective_question| %>
+  <div class="entry">
+    <%= link_to(objective_question.message, objective_question_path(objective_question)) %>
+    <p class="meta">
+      <table>
+        <tr>
+          <td>
+            <%= form_for(@objective_test, :url=> edit_objective_question_path(objective_question), :method => 'get' ) do |f| %>
+            <%= hidden_field_tag :objective_test_id, @objective_test_id %>
+            <%= f.submit "Edit", class: 'btn btn-info' %>
+            <% end %>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <%= form_for(@objective_test, :url=> delete_objective_question_path(objective_question), :method => 'get' ) do |f| %>
+            <%= hidden_field_tag :objective_test_id, @objective_test_id %>
+            <%= f.submit "Delete", class: 'btn btn-danger' %>
+            <% end %>
+          </td>
+          <td>&nbsp;&nbsp;&nbsp;</td>
+          <td>
+            <span>
+              Added by <%= objective_question.origin %>
+            </span>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <span class="date">
+             <%= time_ago_in_words(objective_question.created_at) %> ago
+           </span>
+         </td>
+       </tr>
+     </table>
+   </p>
+ </div>
+ <% end %>
 </div>

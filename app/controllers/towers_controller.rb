@@ -18,7 +18,7 @@ class TowersController < ApplicationController
 		@tower = Tower.new(:towername => params[:tower][:towername], :password => params[:tower][:password])
 		if @tower.save
 			flash[:success] = "Tower created successfully"
-			redirect_to(towers_path)
+			redirect_to(access_login_path)
 		else
 			flash[:danger].now = "Tower couldn't be created."
 			render 'new'
@@ -33,7 +33,7 @@ class TowersController < ApplicationController
 	def update
 		@tower = Tower.find(params[:id])
 		if @tower.update_attributes(tower_params)
-			redirect_to (towers_path)
+			redirect_to(access_login_path)
 		else
 			render 'edit'
 		end
@@ -48,7 +48,7 @@ class TowersController < ApplicationController
 		@tower = Tower.find(params[:id])
 		@tower.destroy
 		flash[:success] = "Tower '#{@tower.towername}' deleted successfully."
-		redirect_to(towers_path)
+		redirect_to(access_login_path)
 	end
 
 	private

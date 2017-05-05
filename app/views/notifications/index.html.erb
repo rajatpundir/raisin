@@ -1,29 +1,46 @@
-<% @page_title = "Manage Notifications" %>
+<% @page_title = "Notifications" %>
 <div class="center page-header">
-  <h2>Manage Notifications</h2>
+  <h2>Notifications for <%= @floor.floorname %></h2>
   <%= form_for(@floor, :url=> new_notification_path, :method => 'get' ) do |f| %>
   <%= hidden_field_tag :floor_id, @floor.id %>
   <%= f.submit "Add new Notification", class: 'btn btn-primary' %>
   <% end %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @notifications.each do |notification| %>
-    <tr>
-      <td><%= notification.origin + ": " + notification.title %></td>
-      <td>
-        <div >
-          <%= link_to("Show", notification_path(notification), :class => 'btn btn-info') %>
+<div class="col-xs-7 col-xs-offset-2">
+  <% @notifications.each do |notification| %>
+  <div class="entry">
+   <%= link_to(notification.title, notification_path(notification)) %>
+   <p class="meta">
+    <table>
+      <tr>
+        <td>
           <%= form_for(@floor, :url=> edit_notification_path(notification), :method => 'get' ) do |f| %>
           <%= hidden_field_tag :floor_id, @floor.id %>
           <%= f.submit "Edit", class: 'btn btn-info' %>
           <% end %>
+        </td>
+        <td>&nbsp;</td>
+        <td>
           <%= form_for(@floor, :url=> delete_notification_path(notification), :method => 'get' ) do |f| %>
           <%= hidden_field_tag :floor_id, @floor.id %>
           <%= f.submit "Delete", class: 'btn btn-danger' %>
           <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          <span>
+            Added by <%= notification.origin %>
+          </span>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <span class="date">
+           <%= time_ago_in_words(notification.created_at) %> ago
+         </span>
+       </td>
+     </tr>
+   </table>
+ </p>
+</div>
+<% end %>
 </div>

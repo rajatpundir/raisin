@@ -1,22 +1,27 @@
 <% @page_title = "Polls" %>
 <div class="center page-header">
   <h2>Polls</h2>
-  <%= form_for(@floor, :url=> new_poll_path, :method => 'get' ) do |f| %>
-  <%= f.submit "Start new Poll", class: 'btn btn-primary' %>
-  <% end %>
+  <%= link_to("Start new Poll", new_poll_path, :class => 'btn btn-primary') %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @polls.each do |poll| %>
-    <tr>
-      <td><%= link_to(poll.origin + ": " + poll.title, poll_path(poll), :class => '') %></td>
-      <td>
-        <div >
-          <%= link_to("Show", poll_path(poll), :class => 'btn btn-info') %>
-          <%= link_to("Edit", edit_poll_path(poll), :class => 'btn btn-info') %>
-          <%= link_to("Delete", delete_poll_path(poll), :class => 'btn btn-info') %>
-      </td>
-    </tr>
+<div class="col-xs-7 col-xs-offset-2">
+ <% @polls.each do |poll| %>
+ <div class="entry">
+  <%= link_to(poll.title, poll_path(poll)) %>
+  <p class="meta">
+    <span class="date">
+      <%= time_ago_in_words(poll.created_at) %> ago
+    </span>
+    <% if session[:username] == poll.origin %>
+    <span>
+      <%= link_to("Edit", edit_poll_path(poll)) %>
+      <%= link_to("Delete", delete_poll_path(poll)) %>
+    </span>
+    <% else %>
+    <span>
+      Posted by <%= poll.origin %>
+    </span>
     <% end %>
-  </table>
+  </p>
+</div>
+<% end %>
 </div>

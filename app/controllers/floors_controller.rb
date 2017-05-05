@@ -6,7 +6,7 @@ class FloorsController < ApplicationController
 	#READ ACTIONS
 	def index
 		@tower = Tower.find(session[:tower_id])
-		@floors = @tower.floors
+		@floors = @tower.floors.order('floors.created_at DESC')
 	end
 
 	def show

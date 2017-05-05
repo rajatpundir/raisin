@@ -2,17 +2,29 @@
 <div class="center page-header">
   <h2>Tests</h2>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @objective_tests.each do |objective_test| %>
-    <tr>
-      <td><%= objective_test.title %></td>
-      <td>Starts in: <%= (objective_test.start_time - Time.now)/60 %> minutes</td>
-      <td>Ends in: <%= (objective_test.end_time - Time.now)/60 %> minutes</td>
-      <td>
-        <%= link_to("Start", exam_path(objective_test), :class => 'btn btn-info') %>
-      </td>
-    </tr>
+<div class="col-xs-7 col-xs-offset-2">
+  <% @objective_tests.each do |objective_test| %>
+  <div class="entry">
+    <%= objective_test.title %>
+    <% if Time.now < objective_test.end_time %>
+    <%= link_to("Start", exam_path(objective_test), :class => 'btn', :style => 'float:right;') %>
     <% end %>
-  </table>
+    <p class="meta">
+      <span class="date">
+        <%= time_ago_in_words(objective_test.created_at) %> ago
+      </span>
+      <% if Time.now < objective_test.start_time %>
+      Starts in <%= time_ago_in_words(objective_test.start_time) %> <br/>
+      <% elsif Time.now <  objective_test.end_time %>
+      The test has started<br/>
+      <% end %>
+      <% if Time.now < objective_test.end_time %>
+      Ends in <%= time_ago_in_words(objective_test.end_time) %> <br/>
+      <% else %>
+      The test has ended<br/>
+      <% end %>
+      Posted by <%= objective_test.origin %>
+    </p>
+  </div>
+  <% end %>
 </div>

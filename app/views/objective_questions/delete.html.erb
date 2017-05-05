@@ -2,7 +2,7 @@
 <%= form_for(@objective_question,:method => 'delete') do |f| %>
 <%= hidden_field_tag :objective_test_id, @objective_test_id %>
 <div class="center page-header">
-  <h2><%= f.object.title %>?</h2>
+  <h2><%= f.object.message %>?</h2>
 </div>
     <div class="center form-group">
       <p>Are you sure you wish to permanently delete this?</p>

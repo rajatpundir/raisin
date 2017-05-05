@@ -1,11 +1,12 @@
+<% @page_title = "Scoreboard" %>
 <div class="center page-header">
-	<h2><%= @objective_test.title %></h2>
+	<h2>Scoreboard for <%= @objective_test.title %></h2>
 	<%= form_for(@objective_test, :url=> objective_questions_path, :method => 'get' ) do |f| %>
     <%= hidden_field_tag :objective_test_id, @objective_test.id %>
     <%= f.submit "Manage Questions", class: 'btn btn-primary' %>
     <% end %>
 </div>
-<div class="col-xs-8 col-xs-offset-2 well well-lg">
+<div class="col-xs-8 col-xs-offset-2">
   <table class="table table-bordered table-striped table-hover table-condensed">
     <% @exam_records.each do |exam_record| %>
     <tr>
