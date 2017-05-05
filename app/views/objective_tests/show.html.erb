@@ -7,9 +7,10 @@
 </div>
 <div class="col-xs-8 col-xs-offset-2 well well-lg">
   <table class="table table-bordered table-striped table-hover table-condensed">
-    <% @objective_questions.each do |objective_question| %>
+    <% @exam_records.each do |exam_record| %>
     <tr>
-      <td><%= simple_format(objective_question.message) %></td>
+      <td><%= Regular.find(exam_record.regular_id).username %></td>
+      <td><%= simple_format(exam_record.score) %></td>
     </tr>
     <% end %>
   </table>

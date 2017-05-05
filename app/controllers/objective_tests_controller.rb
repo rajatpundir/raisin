@@ -12,7 +12,7 @@ class ObjectiveTestsController < ApplicationController
 
 	def show
 		@objective_test = ObjectiveTest.find(params[:id])
-		@objective_questions = @objective_test.objective_questions
+		@exam_records = @objective_test.exam_records
 	end
 
 	# CREATE ACTIONS
