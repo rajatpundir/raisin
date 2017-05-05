@@ -3,7 +3,7 @@ class FloorsController < ApplicationController
 	before_action :confirm_logged_in
 	before_action :is_administrator, :except => [:index, :show]
 
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@tower = Tower.find(session[:tower_id])
 		@floors = @tower.floors.order('floors.created_at DESC')

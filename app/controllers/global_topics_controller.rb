@@ -2,7 +2,7 @@ class GlobalTopicsController < ApplicationController
 
 	before_action :confirm_logged_in
 
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@tower = Tower.find(session[:tower_id])
 		@global_topics = @tower.global_topics.order('global_topics.created_at DESC')

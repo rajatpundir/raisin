@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
 
 	before_action :confirm_logged_in
 
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@floor = Floor.find(session[:floor_id])
 		@topics = @floor.topics.order('topics.created_at DESC')

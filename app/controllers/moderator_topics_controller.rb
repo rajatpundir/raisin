@@ -3,7 +3,7 @@ class ModeratorTopicsController < ApplicationController
 	before_action :confirm_logged_in
 	before_action :is_not_regular
 
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@tower = Tower.find(session[:tower_id])
 		@moderator_topics = @tower.moderator_topics.order('moderator_topics.created_at DESC')

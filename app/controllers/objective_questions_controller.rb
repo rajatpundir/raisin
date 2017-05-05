@@ -3,7 +3,7 @@ class ObjectiveQuestionsController < ApplicationController
 	before_action :confirm_logged_in
 	before_action :is_not_regular
 	
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@objective_test = ObjectiveTest.find(params[:objective_test_id])
 		@objective_test_id = params[:objective_test_id]

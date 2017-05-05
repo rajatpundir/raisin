@@ -2,7 +2,7 @@ class ModeratorsController < ApplicationController
 
 	before_action :is_administrator
 
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@tower = Tower.find(session[:tower_id])
 		@moderators = @tower.moderators.order('moderators.created_at DESC')

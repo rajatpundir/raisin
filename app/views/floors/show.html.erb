@@ -7,20 +7,29 @@
     <table class="table table-bordered table-striped table-hover table-condensed">
       <% @regulars.each do |regular| %>
       <tr>
-        <td><%= link_to(regular.username, regular_path(regular)) %></td>
         <td>
-            <%= link_to("Edit", edit_regular_path(regular)) %>
-            <%= link_to("Delete", delete_regular_path(regular)) %>
-          </div>
+          <% if session[:username] == "admin" %>
+          <%= link_to(regular.username, regular_path(regular)) %>
+          <% else %>
+          <%= regular.username %>
+          <% end %>
         </td>
-      </tr>
+        <% if session[:username] == "admin" %>
+        <td>
+          <%= link_to("Edit", edit_regular_path(regular)) %>
+          <%= link_to("Delete", delete_regular_path(regular)) %>
+        </div>
+      </td>
       <% end %>
-    </table>
-    </div>
+    </tr>
+    <% end %>
+  </table>
+</div>
 </div>
 <div id="right">
   <table class="table table-condensed">
-  <tr>
+    <% if session[:username] == "admin" %>
+    <tr>
       <td>
         <%= form_for(@floor, :url=> new_regular_path, :method => 'get' ) do |f| %>
         <%= hidden_field_tag :floor_id, @floor.id %>
@@ -28,6 +37,7 @@
         <% end %>
       </td>
     </tr>
+    <% end %>
     <tr>
       <td>
         <%= form_for(@floor, :url=> notifications_path, :method => 'get' ) do |f| %>

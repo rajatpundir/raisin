@@ -1,6 +1,6 @@
 class TowersController < ApplicationController
 	
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@towers = Tower.all
 	end

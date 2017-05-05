@@ -142,14 +142,13 @@ ActiveRecord::Schema.define(version: 20170503111400) do
   end
 
   create_table "regulars", force: :cascade do |t|
-    t.string   "username",            null: false
+    t.string   "username",        null: false
     t.string   "first_name"
     t.string   "last_name"
-    t.text     "attempted_questions"
     t.integer  "floor_id"
     t.string   "password_digest"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["floor_id"], name: "index_regulars_on_floor_id"
   end
 

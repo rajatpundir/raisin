@@ -3,7 +3,7 @@ class RegularsController < ApplicationController
 	before_action :confirm_logged_in
 	before_action :is_administrator
 	
-	#READ ACTIONS
+	# READ ACTIONS
 	def index
 		@regulars = Regular.all
 	end
