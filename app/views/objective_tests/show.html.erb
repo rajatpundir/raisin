@@ -10,7 +10,7 @@
     <% @exam_records.each do |exam_record| %>
     <tr>
       <td><%= Regular.find(exam_record.regular_id).username %></td>
-      <td><%= simple_format(exam_record.score) %></td>
+      <td><%= simple_format(exam_record.score.to_s) %></td>
     </tr>
     <% end %>
   </table>
