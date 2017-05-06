@@ -10,14 +10,31 @@ class GlobalTopicsController < ApplicationController
 
 	def show
 		@global_topic = GlobalTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @global_topic.tower.id != session[:tower_id]
+			redirect_to global_topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@global_posts = @global_topic.global_posts.order('global_posts.created_at DESC')
 		@global_post = GlobalPost.new
 	end
 
 	def add_global_post
-		@global_post = GlobalPost.new(:message => params[:global_post][:message], :global_topic_id => params[:global_topic_id], :origin => session[:username])
+		@global_topic = GlobalTopic.find(params[:global_topic_id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @global_topic.tower.id != session[:tower_id]
+			redirect_to global_topics_path
+			return
+		end
+		############################################################
+		############################################################
+		@global_post = GlobalPost.new(:message => params[:global_post][:message], :global_topic_id => @global_topic.id, :origin => session[:username])
 		if @global_post.save
-			redirect_to global_topic_path(params[:global_topic_id])
+			redirect_to global_topic_path(@global_topic.id)
 		else
 			flash[:danger].now = "Post couldn't be created."
 			render 'new'
@@ -26,7 +43,6 @@ class GlobalTopicsController < ApplicationController
 
 	# CREATE ACTIONS
 	def new
-		@tower_id = session[:tower_id]
 		@global_topic = GlobalTopic.new
 	end
 
@@ -44,11 +60,26 @@ class GlobalTopicsController < ApplicationController
 	# UPDATE ACTIONS
 	def edit
 		@global_topic = GlobalTopic.find(params[:id])
-		@tower_id = @global_topic.tower.id
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @global_topic.tower.id != session[:tower_id]
+			redirect_to global_topics_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def update
 		@global_topic = GlobalTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @global_topic.tower.id != session[:tower_id]
+			redirect_to global_topics_path
+			return
+		end
+		############################################################
+		############################################################
 		if @global_topic.update_attributes(global_topic_params)
 			redirect_to global_topics_path(tower_id: @global_topic.tower)
 		else
@@ -59,10 +90,26 @@ class GlobalTopicsController < ApplicationController
 	# DELETE ACTIONS
 	def delete
 		@global_topic = GlobalTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @global_topic.tower.id != session[:tower_id]
+			redirect_to global_topics_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def destroy
 		@global_topic = GlobalTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @global_topic.tower.id != session[:tower_id]
+			redirect_to global_topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@global_topic.destroy
 		flash[:success] = "Topic '#{@global_topic.title}' deleted successfully."
 		redirect_to global_topics_path(tower_id: @global_topic.tower)

@@ -1,23 +1,49 @@
 class TopicsController < ApplicationController
 
 	before_action :confirm_logged_in
+	before_action :is_regular
 
 	# READ ACTIONS
 	def index
 		@floor = Floor.find(session[:floor_id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@topics = @floor.topics.order('topics.created_at DESC')
 	end
 
 	def show
 		@topic = Topic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @topic.floor.tower.id != session[:tower_id]
+			redirect_to topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@posts = @topic.posts.order('posts.created_at DESC')
 		@post = Post.new
 	end
 
 	def add_post
-		@post = Post.new(:message => params[:post][:message], :topic_id => params[:topic_id], :origin => session[:username])
+		@topic = Topic.find(params[:topic_id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @topic.floor.tower.id != session[:tower_id]
+			redirect_to topics_path
+			return
+		end
+		############################################################
+		############################################################
+		@post = Post.new(:message => params[:post][:message], :topic_id => @topic.id, :origin => session[:username])
 		if @post.save
-			redirect_to topic_path(params[:topic_id])
+			redirect_to topic_path(@topic.id)
 		else
 			flash[:danger].now = "Post couldn't be created."
 			render 'new'
@@ -44,11 +70,27 @@ class TopicsController < ApplicationController
 	# UPDATE ACTIONS
 	def edit
 		@topic = Topic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @topic.floor.tower.id != session[:tower_id]
+			redirect_to topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@floor_id = @topic.floor.id
 	end
 
 	def update
 		@topic = Topic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @topic.floor.tower.id != session[:tower_id]
+			redirect_to topics_path
+			return
+		end
+		############################################################
+		############################################################
 		if @topic.update_attributes(topic_params)
 			redirect_to topics_path(floor_id: @topic.floor)
 		else
@@ -59,10 +101,26 @@ class TopicsController < ApplicationController
 	# DELETE ACTIONS
 	def delete
 		@topic = Topic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @topic.floor.tower.id != session[:tower_id]
+			redirect_to topics_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def destroy
 		@topic = Topic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @topic.floor.tower.id != session[:tower_id]
+			redirect_to topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@topic.destroy
 		flash[:success] = "Topic '#{@topic.title}' deleted successfully."
 		redirect_to topics_path(floor_id: @topic.floor)

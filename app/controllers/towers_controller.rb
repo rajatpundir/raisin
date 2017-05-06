@@ -1,14 +1,5 @@
 class TowersController < ApplicationController
 	
-	# READ ACTIONS
-	def index
-		@towers = Tower.all
-	end
-
-	def show
-		@tower = Tower.find(params[:id])
-	end
-
 	# CREATE ACTIONS
 	def new
 		@tower = Tower.new

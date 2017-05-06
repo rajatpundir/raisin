@@ -1,6 +1,7 @@
 class FloorsController < ApplicationController
 
 	before_action :confirm_logged_in
+	before_action :is_not_regular
 	before_action :is_administrator, :except => [:index, :show]
 
 	# READ ACTIONS
@@ -11,6 +12,14 @@ class FloorsController < ApplicationController
 
 	def show
 		@floor = Floor.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 		@regulars = @floor.regulars
 	end
 
@@ -33,10 +42,26 @@ class FloorsController < ApplicationController
 	# UPDATE ACTIONS
 	def edit
 		@floor = Floor.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def update
 		@floor = Floor.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 		if @floor.update_attributes(floor_params)
 			redirect_to (floors_path)
 		else
@@ -47,10 +72,26 @@ class FloorsController < ApplicationController
 	# DELETE ACTIONS
 	def delete
 		@floor = Floor.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def destroy
 		@floor = Floor.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 		@floor.destroy
 		flash[:success] = "Floor '#{@floor.floorname}' deleted successfully."
 		redirect_to(floors_path)

@@ -10,6 +10,14 @@ class ModeratorsController < ApplicationController
 
 	def show
 		@moderator = Moderator.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator.tower.id != session[:tower_id]
+			redirect_to moderators_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	# CREATE ACTIONS
@@ -36,10 +44,26 @@ class ModeratorsController < ApplicationController
 	# UPDATE ACTIONS
 	def edit
 		@moderator = Moderator.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator.tower.id != session[:tower_id]
+			redirect_to moderators_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def update
 		@moderator = Moderator.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator.tower.id != session[:tower_id]
+			redirect_to moderators_path
+			return
+		end
+		############################################################
+		############################################################
 		if @moderator.update_attributes(moderator_params)
 			redirect_to (moderators_path)
 		else
@@ -50,10 +74,26 @@ class ModeratorsController < ApplicationController
 	# DELETE ACTIONS
 	def delete
 		@moderator = Moderator.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator.tower.id != session[:tower_id]
+			redirect_to moderators_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def destroy
 		@moderator = Moderator.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator.tower.id != session[:tower_id]
+			redirect_to moderators_path
+			return
+		end
+		############################################################
+		############################################################
 		@moderator.destroy
 		flash[:success] = "Moderator '#{@moderator.username}' deleted successfully."
 		redirect_to(moderators_path)

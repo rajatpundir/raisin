@@ -11,14 +11,31 @@ class ModeratorTopicsController < ApplicationController
 
 	def show
 		@moderator_topic = ModeratorTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator_topic.tower.id != session[:tower_id]
+			redirect_to moderator_topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@moderator_posts = @moderator_topic.moderator_posts.order('moderator_posts.created_at DESC')
 		@moderator_post = ModeratorPost.new
 	end
 
 	def add_moderator_post
-		@moderator_post = ModeratorPost.new(:message => params[:moderator_post][:message], :moderator_topic_id => params[:moderator_topic_id], :origin => session[:username])
+		@moderator_topic = ModeratorTopic.find(params[:moderator_topic_id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator_topic.tower.id != session[:tower_id]
+			redirect_to moderator_topics_path
+			return
+		end
+		############################################################
+		############################################################
+		@moderator_post = ModeratorPost.new(:message => params[:moderator_post][:message], :moderator_topic_id => @moderator_topic.id, :origin => session[:username])
 		if @moderator_post.save
-			redirect_to moderator_topic_path(params[:moderator_topic_id])
+			redirect_to moderator_topic_path(@moderator_topic.id)
 		else
 			flash[:danger].now = "Post couldn't be created."
 			render 'new'
@@ -27,7 +44,6 @@ class ModeratorTopicsController < ApplicationController
 
 	# CREATE ACTIONS
 	def new
-		@tower_id = session[:tower_id]
 		@moderator_topic = ModeratorTopic.new
 	end
 
@@ -45,11 +61,26 @@ class ModeratorTopicsController < ApplicationController
 	# UPDATE ACTIONS
 	def edit
 		@moderator_topic = ModeratorTopic.find(params[:id])
-		@tower_id = @moderator_topic.tower.id
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator_topic.tower.id != session[:tower_id]
+			redirect_to moderator_topics_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def update
 		@moderator_topic = ModeratorTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator_topic.tower.id != session[:tower_id]
+			redirect_to moderator_topics_path
+			return
+		end
+		############################################################
+		############################################################
 		if @moderator_topic.update_attributes(moderator_topic_params)
 			redirect_to moderator_topics_path(tower_id: @moderator_topic.tower)
 		else
@@ -60,10 +91,26 @@ class ModeratorTopicsController < ApplicationController
 	# DELETE ACTIONS
 	def delete
 		@moderator_topic = ModeratorTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator_topic.tower.id != session[:tower_id]
+			redirect_to moderator_topics_path
+			return
+		end
+		############################################################
+		############################################################
 	end
 
 	def destroy
 		@moderator_topic = ModeratorTopic.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @moderator_topic.tower.id != session[:tower_id]
+			redirect_to moderator_topics_path
+			return
+		end
+		############################################################
+		############################################################
 		@moderator_topic.destroy
 		flash[:success] = "Topic '#{@moderator_topic.title}' deleted successfully."
 		redirect_to moderator_topics_path(tower_id: @moderator_topic.tower)

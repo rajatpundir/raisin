@@ -1,17 +1,35 @@
 class ExamsController < ApplicationController
 
 	before_action :confirm_logged_in
+	before_action :is_regular
 
 	def index
-		@objective_tests = ObjectiveTest.where(:visible => true).order('objective_tests.created_at DESC');
+		@regular = Regular.find_by_username(session[:username])
+		@objective_tests = ObjectiveTest.where(:floor_id => @regular.floor.id).where(:visible => true).order('objective_tests.created_at DESC');
 	end
 
 	def show
 		if params[:objective_question_id]
 			@objective_question = ObjectiveQuestion.find(params[:objective_question_id])
+			############################################################
+			############SECURITY#########CHECK##########################
+			if @objective_question.objective_test.floor.tower.id != session[:tower_id]
+				redirect_to exams_path
+				return
+			end
+			############################################################
+			############################################################
 			@objective_test = @objective_question.objective_test
 		else
 			@objective_test = ObjectiveTest.find(params[:id])
+			############################################################
+			############SECURITY#########CHECK##########################
+			if @objective_test.floor.tower.id != session[:tower_id]
+				redirect_to exams_path
+				return
+			end
+			############################################################
+			############################################################
 		end
 		if !@objective_test.visible or (Time.now.utc < @objective_test.start_time) or (Time.now.utc > @objective_test.end_time)
 			redirect_to exams_path

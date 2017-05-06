@@ -8,6 +8,10 @@
 </div>
 <div class="col-xs-8 col-xs-offset-2">
   <table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+      <td>Username</td>
+      <td>Score</td>
+    </tr>
     <% @exam_records.each do |exam_record| %>
     <tr>
       <td><%= Regular.find(exam_record.regular_id).username %></td>

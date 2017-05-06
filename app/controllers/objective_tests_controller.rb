@@ -6,23 +6,57 @@ class ObjectiveTestsController < ApplicationController
 	# READ ACTIONS
 	def index
 		@floor = Floor.find(params[:floor_id])
-		@floor_id = params[:floor_id]
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
+		@floor_id = @floor.id
 		@objective_tests = @floor.objective_tests.order('objective_tests.created_at DESC')
 	end
 
 	def show
 		@objective_test = ObjectiveTest.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @objective_test.floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 		@exam_records = @objective_test.exam_records
 	end
 
 	# CREATE ACTIONS
 	def new
+		@floor = Floor.find(params[:floor_id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
+		@floor_id = @floor.id
 		@objective_test = ObjectiveTest.new
-		@floor_id = params[:floor_id]
 	end
 
 	def create
-		@objective_test = ObjectiveTest.new(:title => params[:objective_test][:title], :start_time => Time.now.utc + params[:objective_test][:start_time].to_i, :end_time => Time.now.utc + params[:objective_test][:end_time].to_i, :test_duration => params[:objective_test][:test_duration], :floor_id => params[:floor_id], :origin => session[:username])
+		@floor = Floor.find(params[:floor_id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
+		@objective_test = ObjectiveTest.new(:title => params[:objective_test][:title], :start_time => Time.now.utc + params[:objective_test][:start_time].to_i, :end_time => Time.now.utc + params[:objective_test][:end_time].to_i, :test_duration => params[:objective_test][:test_duration], :floor_id => @floor.id, :origin => session[:username])
 		if @objective_test.save
 			flash[:success] = "Test created successfully"
 			redirect_to objective_tests_path(floor_id: params[:floor_id])
@@ -34,14 +68,31 @@ class ObjectiveTestsController < ApplicationController
 
 	# UPDATE ACTIONS
 	def edit
+		@floor = Floor.find(params[:floor_id])
 		@objective_test = ObjectiveTest.find(params[:id])
-		@floor_id = params[:floor_id]
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @floor.tower.id != session[:tower_id] or @objective_test.floor.id != @floor.id
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
+		@floor_id = @floor.id
 	end
 
 	def update
 		@objective_test = ObjectiveTest.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @objective_test.floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 		if @objective_test.update_attributes(objective_test_params)
-			redirect_to objective_tests_path(floor_id: params[:floor_id])
+			redirect_to objective_tests_path(floor_id: @objective_test.floor.id)
 		else
 			render 'edit'
 		end
@@ -50,14 +101,30 @@ class ObjectiveTestsController < ApplicationController
 	# DELETE ACTIONS
 	def delete
 		@objective_test = ObjectiveTest.find(params[:id])
-		@floor_id = params[:floor_id]
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @objective_test.floor.tower.id != session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
+		@floor_id = @floor.id
 	end
 
 	def destroy
 		@objective_test = ObjectiveTest.find(params[:id])
+		############################################################
+		############SECURITY#########CHECK##########################
+		if @objective_test.floor.tower.id !=  session[:tower_id]
+			redirect_to floors_path
+			return
+		end
+		############################################################
+		############################################################
 		@objective_test.destroy
 		flash[:success] = "Test '#{@objective_test.title}' deleted successfully."
-		redirect_to objective_tests_path(floor_id: params[:floor_id])
+		redirect_to objective_tests_path(floor_id: @objective_test.floor.id)
 	end
 
 	private
