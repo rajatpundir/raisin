@@ -1,4 +1,16 @@
 class TowersController < ApplicationController
+
+	before_action :confirm_logged_in
+	before_action :is_administrator, :except => [:new, :create]
+
+	# READ ACTIONS
+	def index
+		redirect_to access_logout_path
+	end
+
+	def show
+		@tower = Tower.find(session[:tower_id])
+	end
 	
 	# CREATE ACTIONS
 	def new
@@ -18,11 +30,11 @@ class TowersController < ApplicationController
 
 	# UPDATE ACTIONS
 	def edit
-		@tower = Tower.find(params[:id])
+		@tower = Tower.find(session[:tower_id])
 	end
 
 	def update
-		@tower = Tower.find(params[:id])
+		@tower = Tower.find(session[:tower_id])
 		if @tower.update_attributes(tower_params)
 			redirect_to(access_login_path)
 		else
@@ -32,11 +44,11 @@ class TowersController < ApplicationController
 
 	# DELETE ACTIONS
 	def delete
-		@tower = Tower.find(params[:id])
+		@tower = Tower.find(session[:tower_id])
 	end
 
 	def destroy
-		@tower = Tower.find(params[:id])
+		@tower = Tower.find(session[:tower_id])
 		@tower.destroy
 		flash[:success] = "Tower '#{@tower.towername}' deleted successfully."
 		redirect_to(access_login_path)

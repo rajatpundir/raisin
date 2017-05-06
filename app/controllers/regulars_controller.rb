@@ -4,6 +4,10 @@ class RegularsController < ApplicationController
 	before_action :is_administrator
 	
 	# READ ACTIONS
+	def index
+		redirect_to access_logout_path
+	end
+
 	def show
 		@regular = Regular.find(params[:id])
 		############################################################

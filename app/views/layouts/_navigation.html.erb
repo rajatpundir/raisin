@@ -33,6 +33,11 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if session[:user_id] != nil %>
+        <% if session[:usertype] == "admin" %>
+        <li><%= link_to session[:username], tower_path(session[:tower_id]) %></li>
+        <% else %>
+        <li><%= link_to session[:username], '#' %></li>
+        <% end %>
         <li><%= link_to "Logout", access_logout_path %></li>
       <% else %>
         <li><%= link_to "Register", new_tower_path %></li>
