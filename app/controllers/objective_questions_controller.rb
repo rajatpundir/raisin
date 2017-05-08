@@ -2,7 +2,7 @@ class ObjectiveQuestionsController < ApplicationController
 
 	before_action :confirm_logged_in
 	before_action :is_not_regular
-	
+
 	# READ ACTIONS
 	def index
 		@objective_test = ObjectiveTest.find(params[:objective_test_id])
@@ -31,7 +31,7 @@ class ObjectiveQuestionsController < ApplicationController
 	end
 
 	def add_wrong_answer
-		@objective_question = ObjectiveQuestion.find(params[:id])
+		@objective_question = ObjectiveQuestion.find(params[:objective_question_id])
 		############################################################
 		############SECURITY#########CHECK##########################
 		if @objective_question.objective_test.floor.tower.id != session[:tower_id]
