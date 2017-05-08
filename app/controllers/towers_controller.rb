@@ -1,6 +1,6 @@
 class TowersController < ApplicationController
 
-	before_action :confirm_logged_in
+	before_action :confirm_logged_in, :except => [:new, :create]
 	before_action :is_administrator, :except => [:new, :create]
 
 	# READ ACTIONS
