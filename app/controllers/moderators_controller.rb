@@ -26,7 +26,8 @@ class ModeratorsController < ApplicationController
 	end
 
 	def create
-		if params[:moderator][:username] == "admin" or Regular.find_by_username(params[:moderator][:username]) != nil
+		@tower = Tower.find(session[:tower_id])
+		if params[:moderator][:username] == "admin" or @tower.moderators.find_by_username(params[:moderator][:username]) != nil or @tower.regulars.find_by_username(params[:moderator][:username]) != nil
 			flash[:danger].now = "Username not available."
 			render 'new'
 		else

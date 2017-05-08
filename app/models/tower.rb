@@ -4,6 +4,7 @@ class Tower < ApplicationRecord
 	has_many :floors, :dependent => :destroy
 	has_many :moderator_topics, :dependent => :destroy
 	has_many :global_topics, :dependent => :destroy
+	has_many :regulars, :dependent => :destroy
 
 	has_secure_password
 

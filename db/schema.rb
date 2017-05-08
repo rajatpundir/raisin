@@ -146,10 +146,12 @@ ActiveRecord::Schema.define(version: 20170503111400) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "floor_id"
+    t.integer  "tower_id"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["floor_id"], name: "index_regulars_on_floor_id"
+    t.index ["tower_id"], name: "index_regulars_on_tower_id"
   end
 
   create_table "tags", force: :cascade do |t|

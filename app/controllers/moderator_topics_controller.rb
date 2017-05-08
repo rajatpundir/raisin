@@ -1,7 +1,7 @@
 class ModeratorTopicsController < ApplicationController
 
 	before_action :confirm_logged_in
-	before_action :is_not_regular
+	before_action :is_administrator
 
 	# READ ACTIONS
 	def index

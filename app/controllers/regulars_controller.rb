@@ -12,7 +12,7 @@ class RegularsController < ApplicationController
 		@regular = Regular.find(params[:id])
 		############################################################
 		############SECURITY#########CHECK##########################
-		if @regular.floor.tower.id != session[:tower_id]
+		if @regular.tower.id != session[:tower_id]
 			redirect_to floors_path
 			return
 		end
@@ -45,11 +45,12 @@ class RegularsController < ApplicationController
 		end
 		############################################################
 		############################################################
-		if params[:regular][:username] == "admin" or Moderator.find_by_username(params[:regular][:username]) != nil
+		@tower = @floor.tower
+		if params[:regular][:username] == "admin" or @tower.moderators.find_by_username(params[:regular][:username]) != nil or @tower.regulars.find_by_username(params[:regular][:username]) != nil
 			flash[:danger] = "Username not available."
 			redirect_to(floor_path(params[:floor_id]))
 		else
-			@regular = Regular.new(:username => params[:regular][:username], :password => params[:regular][:password], :first_name => params[:regular][:first_name], :last_name => params[:regular][:last_name], :floor_id => @floor.id)
+			@regular = Regular.new(:username => params[:regular][:username], :password => params[:regular][:password], :first_name => params[:regular][:first_name], :last_name => params[:regular][:last_name], :floor_id => @floor.id, :tower_id => @floor.tower.id)
 			if @regular.save
 				flash[:success] = "Regular created successfully."
 				redirect_to(floor_path(@floor.id))
@@ -65,7 +66,7 @@ class RegularsController < ApplicationController
 		@regular = Regular.find(params[:id])
 		############################################################
 		############SECURITY#########CHECK##########################
-		if @regular.floor.tower.id != session[:tower_id]
+		if @regular.tower.id != session[:tower_id]
 			redirect_to floors_path
 			return
 		end
@@ -77,7 +78,7 @@ class RegularsController < ApplicationController
 		@regular = Regular.find(params[:id])
 		############################################################
 		############SECURITY#########CHECK##########################
-		if @regular.floor.tower.id != session[:tower_id]
+		if @regular.tower.id != session[:tower_id]
 			redirect_to floors_path
 			return
 		end
@@ -95,7 +96,7 @@ class RegularsController < ApplicationController
 		@regular = Regular.find(params[:id])
 		############################################################
 		############SECURITY#########CHECK##########################
-		if @regular.floor.tower.id != session[:tower_id]
+		if @regular.tower.id != session[:tower_id]
 			redirect_to floors_path
 			return
 		end
@@ -107,7 +108,7 @@ class RegularsController < ApplicationController
 		@regular = Regular.find(params[:id])
 		############################################################
 		############SECURITY#########CHECK##########################
-		if @regular.floor.tower.id != session[:tower_id]
+		if @regular.tower.id != session[:tower_id]
 			redirect_to floors_path
 			return
 		end

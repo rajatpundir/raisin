@@ -4,7 +4,6 @@ class Moderator < ApplicationRecord
 	has_secure_password
 
 	validates_presence_of :username
-	validates_uniqueness_of :username
 
 	def name
 		"#{first_name} #{last_name}"
